@@ -1,6 +1,6 @@
 package com.mzx.api.cms;
 
-import com.mzx.bean.cms.request.QueryPageRequest;
+import com.mzx.framework.model.cms.requesed.QueryPageRequest;
 import com.mzx.common.model.response.QueryResponseResult;
 
 /**
@@ -9,6 +9,6 @@ import com.mzx.common.model.response.QueryResponseResult;
  */
 public interface CmsPageControllerApi {
 
-    QueryResponseResult findList(int number, int size, QueryPageRequest queryPageRequest);
+    public QueryResponseResult findList(int number, int size, QueryPageRequest queryPageRequest);
 
 }
