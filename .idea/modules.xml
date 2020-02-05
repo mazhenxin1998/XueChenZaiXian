@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/XueChengZaiXian.iml" filepath="$PROJECT_DIR$/XueChengZaiXian.iml" />
+      <module fileurl="file://$PROJECT_DIR$/XueChengZaiXian-Api/XueChengZaiXian-Api.iml" filepath="$PROJECT_DIR$/XueChengZaiXian-Api/XueChengZaiXian-Api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/XueChengZaiXian-Common/XueChengZaiXian-Common.iml" filepath="$PROJECT_DIR$/XueChengZaiXian-Common/XueChengZaiXian-Common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/XueChengZaiXian-Model/XueChengZaiXian-Model.iml" filepath="$PROJECT_DIR$/XueChengZaiXian-Model/XueChengZaiXian-Model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/XueChengZaiXian-Util/XueChengZaiXian-Util.iml" filepath="$PROJECT_DIR$/XueChengZaiXian-Util/XueChengZaiXian-Util.iml" />
+    </modules>
+  </component>
+</project>

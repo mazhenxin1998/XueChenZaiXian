@@ -1,0 +1,10 @@
+com\mzx\bean\XueChengZaiXianModelApp.class
+com\mzx\bean\cms\CmsSite.class
+com\mzx\bean\cms\CmsConfigModel.class
+com\mzx\bean\cms\CmsConfig.class
+com\mzx\bean\cms\CmsTemplate.class
+com\mzx\bean\cms\CmsPage.class
+com\mzx\bean\cms\request\QueryPageRequest.class
+com\mzx\bean\cms\CmsPageParam.class
+com\mzx\bean\cms\CmsSiteServer.class
+com\mzx\bean\cms\response\CmsCode.class

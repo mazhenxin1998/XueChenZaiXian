@@ -1,0 +1,8 @@
+com\mzx\common\model\response\ResponseResult.class
+com\mzx\common\model\response\QueryResult.class
+com\mzx\common\model\response\Response.class
+com\mzx\common\XueChengZaiXianCommonApp.class
+com\mzx\common\model\response\QueryResponseResult.class
+com\mzx\common\model\response\CommonCode.class
+com\mzx\common\model\request\RequestData.class
+com\mzx\common\model\response\ResultCode.class

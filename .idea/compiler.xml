@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="XueChengZaiXian-Model" />
+        <module name="XueChengZaiXian-Common" />
+        <module name="XueChengZaiXian-Util" />
+        <module name="XueChengZaiXian-Api" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="XueChengZaiXian" target="1.8" />
+      <module name="XueChengZaiXian-Api" target="1.8" />
+      <module name="XueChengZaiXian-Common" target="1.8" />
+      <module name="XueChengZaiXian-Model" target="1.8" />
+      <module name="XueChengZaiXian-Util" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="XueChengZaiXian" options="" />
+      <module name="XueChengZaiXian-Api" options="-parameters" />
+      <module name="XueChengZaiXian-Common" options="-parameters" />
+      <module name="XueChengZaiXian-Model" options="-parameters" />
+      <module name="XueChengZaiXian-Util" options="-parameters" />
+    </option>
+  </component>
+</project>
