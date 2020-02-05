@@ -2,8 +2,14 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/XueChengZaiXian-Api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XueChengZaiXian-Api/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/XueChengZaiXian-Common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XueChengZaiXian-Common/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/XueChengZaiXian-Model/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XueChengZaiXian-Model/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XueChengZaiXian-Server-Manage-Cms/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XueChengZaiXian-Server-Manage-Cms/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/XueChengZaiXian-Util/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XueChengZaiXian-Util/src/main/resources" charset="UTF-8" />
   </component>
 </project>

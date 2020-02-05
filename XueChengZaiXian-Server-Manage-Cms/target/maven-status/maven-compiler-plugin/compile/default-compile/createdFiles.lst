@@ -1,0 +1,3 @@
+com\mzx\server\managecms\dao\CmsPageRepository.class
+com\mzx\server\managecms\controller\CmsPageController.class
+com\mzx\server\managecms\ServerManageCmsApp.class

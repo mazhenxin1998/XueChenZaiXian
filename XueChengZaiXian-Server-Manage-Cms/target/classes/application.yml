@@ -1,0 +1,10 @@
+server:
+  port: 31001
+
+spring:
+  application:
+    name: xuechengzaixian-server-manager-cms
+  data:
+    mongodb:
+      uri: mongodb://localhost
+      database: xc_cms
