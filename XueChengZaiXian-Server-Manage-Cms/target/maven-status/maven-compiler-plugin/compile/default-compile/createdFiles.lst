@@ -1,3 +1,14 @@
+com\mzx\server\managecms\dao\CmsTemplateRepository.class
+com\mzx\server\managecms\service\impl\PageServiceImpl.class
+com\mzx\server\managecms\service\IPageService.class
+com\mzx\server\managecms\controller\CmsSiteController.class
+com\mzx\server\managecms\service\impl\TemplateServiceImpl.class
+com\mzx\server\managecms\service\ITemplateService.class
+com\mzx\server\managecms\service\impl\SiteServiceImpl.class
 com\mzx\server\managecms\dao\CmsPageRepository.class
 com\mzx\server\managecms\controller\CmsPageController.class
 com\mzx\server\managecms\ServerManageCmsApp.class
+com\mzx\server\managecms\dao\CmsSiteRepository.class
+com\mzx\server\managecms\controller\CmsTemplateController.class
+com\mzx\server\managecms\service\ISiteService.class
+com\mzx\server\managecms\dao\StudentRepository.class

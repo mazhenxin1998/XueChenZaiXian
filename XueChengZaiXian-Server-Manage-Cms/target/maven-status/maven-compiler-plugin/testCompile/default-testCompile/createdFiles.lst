@@ -1,1 +1,7 @@
+com\mzx\server\managercms\service\TemplateServiceTest.class
 com\mzx\server\managercms\dao\CmsPageRepositoryTest.class
+com\mzx\server\managercms\time\TimeTest.class
+com\mzx\server\managercms\dao\CmsSiteRepositoryTest.class
+com\mzx\server\managercms\dao\CmsTemplateRepositoryTest.class
+com\mzx\server\managercms\dao\PageServiceImplTest.class
+com\mzx\server\managercms\service\SiteServiceTest.class

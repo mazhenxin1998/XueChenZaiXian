@@ -6,20 +6,20 @@ import com.mzx.common.model.response.QueryResponseResult;
 import com.mzx.common.model.response.QueryResult;
 import com.mzx.framework.model.cms.CmsPage;
 import com.mzx.framework.model.cms.Student;
+import com.mzx.framework.model.cms.requesed.AddPageRequest;
 import com.mzx.framework.model.cms.requesed.QueryPageRequest;
 import com.mzx.server.managecms.dao.CmsPageRepository;
 import com.mzx.server.managecms.dao.StudentRepository;
+import com.mzx.server.managecms.service.IPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author ZhenXinMa
@@ -29,43 +29,39 @@ import java.util.List;
 @RequestMapping(value = "/cms/page")
 public class CmsPageController implements CmsPageControllerApi {
 
+    /**
+     *   底层是JDK动态代理
+     */
     @Autowired
-    private CmsPageRepository cmsPageRepository;
-
-    @Autowired
-    private StudentRepository studentRepository;
+    private IPageService pageService;
 
     @Override
     @GetMapping(value = "/list/{page}/{size}")
-    public QueryResponseResult findList(@PathVariable("page") int number,
+    public QueryResponseResult findList(@PathVariable("page") int page,
                                         @PathVariable("size") int size,
                                         QueryPageRequest queryPageRequest) {
-        List<CmsPage> all = cmsPageRepository.findAll();
-        if(all!=null){
-            System.out.println(all.size());
-        }
+        return pageService.findList(page,size,queryPageRequest);
+    }
 
-        List<Student> all1 = studentRepository.findAll();
-        if( all1 != null){
-            System.out.println(all1);
-        }
+    @Override
+    @GetMapping(value = "/get")
+    public QueryResponseResult get( QueryPageRequest queryPageRequest) {
+        return pageService.get(queryPageRequest);
+    }
 
+    @Override
+    @PostMapping(value = "/add")
+    public QueryResponseResult add(CmsPage request) {
+        return pageService.add(request);
+    }
 
-        // 测试分页查询
-        Pageable pageable = PageRequest.of(number,size);
-        Page<CmsPage> all2 = cmsPageRepository.findAll(pageable);
-        for (CmsPage cmsPage : all2) {
-            System.out.println(cmsPage);
-        }
+    @Override
+    public QueryResponseResult delete(QueryPageRequest request) {
+        return null;
+    }
 
-        QueryResult<CmsPage> queryResult = new QueryResult<CmsPage>();
-        List<CmsPage> list = new ArrayList<>();
-        CmsPage cmsPage = new CmsPage();
-        cmsPage.setPageName("测试页面");
-        list.add(cmsPage);
-        queryResult.setList(list);
-        queryResult.setTotal(1L);
-
-        return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
+    @Override
+    public QueryResponseResult update(CmsPage request) {
+        return null;
     }
 }

@@ -1,9 +1,15 @@
 package com.mzx.framework.model.cms;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import javafx.scene.chart.ValueAxis;
 import lombok.Data;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.io.Serializable;
 
 /**
  * @author ZhenXinMa
@@ -11,54 +17,57 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Data
 @ToString
+@Accessors(chain = true)
 @Document(collection = "cms_page")
-public class CmsPage {
+@ApiModel
+public class CmsPage implements Serializable {
 
-    // 页面ID  主键
+    @ApiModelProperty(value = "页面ID")
     private String id;
 
-    // 站点ID  2
+    @ApiModelProperty(value = "站点ID      必填")
     private String siteId;
 
-    // 页面名称  2
+    @ApiModelProperty(value = "页面名称     必填")
     private String pageName;
 
-    // 页面别名  2
+    @ApiModelProperty(value = "页面别名     选填")
     private String pageAliase;
 
-    // 页面访问地址 相对于Nginx服务器 2
+    @ApiModelProperty(value = "页面访问地址  必填")
     private String pageWebPath;
 
+    @ApiModelProperty(value = "未知          可填")
     private String pageParameter;
 
-    // 物理路径 2
+    @ApiModelProperty(value = "物理路径       必填")
     private String pagePhysicalPath;
 
-    // 页面是静态、动态 2
+    @ApiModelProperty(value = "页面类型        必填")
     private String pageType;
 
-    // 页面模板
+    @ApiModelProperty(value = "页面模板        选填")
     private String pageTemplate;
 
-    //页面静态化内容
+    @ApiModelProperty(value = "页面静态化       必填")
     private String pageHtml;
 
-    // 页面状态
+    @ApiModelProperty(value = "页面状态          选填")
     private String pageStatus;
 
-    // 页面创建时间 2
+    @ApiModelProperty(value = "页面创建时间       必填")
     private String pageCreateTime;
 
-    // 模板ID  2
+    @ApiModelProperty(value = "模板ID             必填")
     private String templateId;
 
     //模板文件ID
 //    private String templateFileId;
 
-    // 静态文件ID 2
+    @ApiModelProperty(value = "静态文件ID          选填")
     private String htmlFileId;
 
-    // 数据URL
+    @ApiModelProperty(value = "数据URL           不必填")
     private String dataUrl;
 
     //参数列表

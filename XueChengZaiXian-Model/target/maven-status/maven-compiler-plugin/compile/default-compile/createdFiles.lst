@@ -1,5 +1,6 @@
 com\mzx\framework\model\cms\CmsSite.class
 com\mzx\framework\model\cms\CmsSiteServer.class
+com\mzx\framework\model\cms\requesed\AddPageRequest.class
 com\mzx\framework\model\cms\requesed\QueryPageRequest.class
 com\mzx\framework\model\cms\Student.class
 com\mzx\framework\model\cms\response\CmsCode.class

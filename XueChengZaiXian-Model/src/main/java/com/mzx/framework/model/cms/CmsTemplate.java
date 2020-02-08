@@ -1,5 +1,7 @@
 package com.mzx.framework.model.cms;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
@@ -12,20 +14,23 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @ToString
 @Document(collection = "cms_template")
+@ApiModel(value = "页面模板模型")
 public class CmsTemplate {
 
-
-    //站点ID
+    @ApiModelProperty(value = "站点ID")
     private String siteId;
-    //模版ID
+
+    @ApiModelProperty(value = "模板ID")
     @Id
     private String templateId;
-    //模版名称
+
+    @ApiModelProperty(value = "模板名称")
     private String templateName;
-    //模版参数
+
+    @ApiModelProperty(value = "模板参数")
     private String templateParameter;
 
-    //模版文件Id
+    @ApiModelProperty(value = "模板文件ID")
     private String templateFileId;
 
 }
