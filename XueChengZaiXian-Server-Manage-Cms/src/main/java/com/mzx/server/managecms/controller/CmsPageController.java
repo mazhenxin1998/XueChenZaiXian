@@ -51,17 +51,22 @@ public class CmsPageController implements CmsPageControllerApi {
 
     @Override
     @PostMapping(value = "/add")
-    public QueryResponseResult add(CmsPage request) {
+    public QueryResponseResult add(@RequestBody CmsPage request) {
         return pageService.add(request);
     }
 
     @Override
-    public QueryResponseResult delete(QueryPageRequest request) {
-        return null;
+    @GetMapping(value = "/delete/{pageID}")
+    public QueryResponseResult delete(@PathVariable(value = "pageID") String pageID) {
+        System.out.println(pageID);
+        System.out.println("删除ID"+pageID+"方法执行了");
+        QueryResponseResult result = pageService.delete(pageID);
+        return result;
     }
 
     @Override
-    public QueryResponseResult update(CmsPage request) {
-        return null;
+    @PostMapping(value = "/update/{id}")
+    public QueryResponseResult update(@RequestBody CmsPage request ,@PathVariable(value = "id")String id) {
+        return pageService.update(request,id);
     }
 }

@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -111,17 +112,57 @@ public class PageServiceImpl implements IPageService {
     @Override
     public QueryResponseResult add(CmsPage cmsPage) {
         cmsPageRepository.save(cmsPage);
-        return new  QueryResponseResult(CommonCode.SUCCESS,null);
+        QueryResult<CmsPage> queryResult = new QueryResult<CmsPage>();
+        queryResult.setList(null);
+        queryResult.setTotal(0L);
+        return new  QueryResponseResult(CommonCode.SUCCESS,queryResult);
     }
 
     @Override
-    public QueryResponseResult delete(QueryPageRequest request) {
-        return null;
+    public QueryResponseResult delete(String pageID) {
+
+        cmsPageRepository.deleteById(pageID);
+        QueryResult<CmsPage> result = new QueryResult<>();
+        result.setList(null);
+        result.setTotal(0L);
+
+        return new QueryResponseResult(CommonCode.SUCCESS,result);
     }
 
     @Override
-    public QueryResponseResult update(CmsPage request) {
-        return null;
+    public QueryResponseResult update(CmsPage request,String pageID) {
+
+        QueryResult<CmsPage> result = new QueryResult<>();
+        Optional<CmsPage> o = cmsPageRepository.findById(pageID);
+        if( o.isPresent() ){
+            CmsPage cmsPage = o.get();
+            cmsPage.setSiteId(request.getSiteId());
+            cmsPage.setTemplateId(request.getTemplateId());
+            cmsPage.setPageName(request.getPageName());
+            if(!StringUtils.isEmpty(request.getPageAliase())){
+                cmsPage.setPageAliase(request.getPageAliase());
+            }
+            cmsPage.setPageWebPath(request.getPageWebPath());
+            cmsPage.setPagePhysicalPath(request.getPagePhysicalPath());
+
+            if( !StringUtils.isEmpty(request.getDataUrl() )){
+                cmsPage.setDataUrl(request.getDataUrl());
+            }
+
+            if( !StringUtils.isEmpty(request.getPageType() )){
+                cmsPage.setPageType(request.getPageType());
+            }
+            if( !StringUtils.isEmpty(request.getPageCreateTime() )){
+                cmsPage.setPageCreateTime(request.getPageCreateTime());
+            }
+
+            cmsPageRepository.save(cmsPage);
+            List<CmsPage> list = new ArrayList<CmsPage>();
+            list.add(cmsPage);
+            result.setList(list);
+            result.setTotal(1L);
+        }
+        return new QueryResponseResult(CommonCode.SUCCESS,result);
     }
 
 

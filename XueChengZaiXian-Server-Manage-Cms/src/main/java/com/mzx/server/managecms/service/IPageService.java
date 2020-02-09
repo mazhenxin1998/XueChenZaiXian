@@ -39,17 +39,17 @@ public interface IPageService {
 
     /**
      *
-     * @param request
+     * @param pageID
      * @return
      */
-    QueryResponseResult delete(QueryPageRequest request);
+    QueryResponseResult delete(String pageID);
 
     /**
      *
      * @param request
      * @return
      */
-    QueryResponseResult update(CmsPage request);
+    QueryResponseResult update(CmsPage request,String pageID);
 
 
 }

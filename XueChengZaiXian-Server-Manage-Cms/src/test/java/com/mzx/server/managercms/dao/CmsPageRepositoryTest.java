@@ -1,8 +1,8 @@
 package com.mzx.server.managercms.dao;
 
 import com.mzx.common.model.response.QueryResponseResult;
+
 import com.mzx.framework.model.cms.CmsPage;
-import com.mzx.framework.model.cms.requesed.AddPageRequest;
 import com.mzx.framework.model.cms.requesed.QueryPageRequest;
 import com.mzx.server.managecms.ServerManageCmsApp;
 
@@ -16,7 +16,7 @@ import org.springframework.data.domain.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -134,6 +134,27 @@ public class CmsPageRepositoryTest {
             CmsPage cmsPage = o.get();
             cmsPage.setPageName("我是修改之后的名字");
         }
+
+    }
+
+    /**
+     *   "_id" : ObjectId("5e3fd599ab234952a066c2cc"),
+     *   "siteId" : "5b30b052f58b4411fc6cb1cf",
+     *   "pageName" : "www",
+     *   "pageAliase" : "www",
+     *   "pageWebPath" : "www",
+     *   "pageParameter" : "",
+     *   "pagePhysicalPath" : "www",
+     *   "pageType" : "0",
+     *   "pageCreateTime" : "2020-02-09T09:48:41.539Z",
+     *   "templateId" : "5a962b52b00ffc514038faf7",
+     *   "_class" : "com.mzx.framework.model.cms.CmsPage"
+     * }
+     */
+    @Test
+    public void update (){
+
+
 
     }
 

@@ -40,9 +40,9 @@ public interface CmsPageControllerApi {
     public QueryResponseResult add(CmsPage request);
 
     @ApiOperation(value = "删除CMS页面")
-    public QueryResponseResult delete(QueryPageRequest request);
+    public QueryResponseResult delete(String pageID);
 
     @ApiOperation(value = "修改CMS页面")
-    public QueryResponseResult update(CmsPage request);
+    public QueryResponseResult update(CmsPage request,String pageID);
 
 }

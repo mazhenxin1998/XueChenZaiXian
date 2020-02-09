@@ -44,7 +44,6 @@ public interface CmsPageRepository extends MongoRepository<CmsPage,String> {
 
     Optional<List<CmsPage>> findBySiteIdAndPageAliase(String siteId,String pageAliase);
 
-    Optional<CmsPage> findById(String Id);
 
 
 

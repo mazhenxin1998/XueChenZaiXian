@@ -30,8 +30,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("学成网api文档")
-                .description("学成网api文档")
+                .title("学成在线API文档")
+                .description("学成在线API文档")
 //                .termsOfServiceUrl("/")
                 .version("1.0")
                 .build();
