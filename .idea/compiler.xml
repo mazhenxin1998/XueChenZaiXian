@@ -6,17 +6,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="XueChengZaiXian-Model" />
-        <module name="XueChengZaiXian-Common" />
-        <module name="XueChengZaiXian-Server-Manage-Cms" />
-        <module name="XueChengZaiXian-Util" />
         <module name="XueChengZaiXian-Api" />
+        <module name="XueChengZaiXian-Server-Manage-Cms" />
+        <module name="XueChengZaiXian-Freemarker-Test" />
+        <module name="XueChengZaiXian-Common" />
+        <module name="XueChengZaiXian-Model" />
+        <module name="XueChengZaiXian-Util" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="XueChengZaiXian" target="1.8" />
       <module name="XueChengZaiXian-Api" target="1.8" />
       <module name="XueChengZaiXian-Common" target="1.8" />
+      <module name="XueChengZaiXian-Freemarker-Test" target="1.8" />
       <module name="XueChengZaiXian-Model" target="1.8" />
       <module name="XueChengZaiXian-Server-Manage-Cms" target="1.8" />
       <module name="XueChengZaiXian-Util" target="1.8" />

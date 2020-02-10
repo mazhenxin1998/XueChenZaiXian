@@ -1,4 +1,7 @@
+com\mzx\common\exception\ExceptionCatch.class
 com\mzx\common\model\response\ResponseResult.class
+com\mzx\common\exception\CustomException.class
+com\mzx\common\exception\ThrowException.class
 com\mzx\common\model\response\QueryResult.class
 com\mzx\common\model\response\Response.class
 com\mzx\common\XueChengZaiXianCommonApp.class

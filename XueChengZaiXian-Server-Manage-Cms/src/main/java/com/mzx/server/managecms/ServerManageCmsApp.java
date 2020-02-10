@@ -12,6 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @EntityScan(value = "com.mzx.framework.model.cms")
 @ComponentScan(basePackages = {"com.mzx.api"})
+@ComponentScan(basePackages = {"com.mzx.common"})
 @ComponentScan(basePackages = {"com.mzx.server.managecms"})
 public class ServerManageCmsApp {
     public static void main(String[] args) {

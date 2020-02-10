@@ -1,11 +1,13 @@
 package com.mzx.server.managecms.service.impl;
 
+import com.mzx.common.exception.CustomException;
+import com.mzx.common.exception.ThrowException;
 import com.mzx.common.model.response.CommonCode;
 import com.mzx.common.model.response.QueryResponseResult;
 import com.mzx.common.model.response.QueryResult;
 import com.mzx.framework.model.cms.CmsPage;
-import com.mzx.framework.model.cms.requesed.AddPageRequest;
 import com.mzx.framework.model.cms.requesed.QueryPageRequest;
+import com.mzx.framework.model.cms.response.CmsCode;
 import com.mzx.server.managecms.dao.CmsPageRepository;
 import com.mzx.server.managecms.service.IPageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -32,21 +35,19 @@ public class PageServiceImpl implements IPageService {
 
     @Override
     public QueryResponseResult get( QueryPageRequest request) {
+
         System.out.println(request);
         QueryResponseResult result = null;
         QueryResult<CmsPage> queryResult = null;
 
         // 根据站点ID精确查询
-        if((request.getSiteId() != null || request.getSiteId() != "")&&(request.getPageAliase() ==null || request.getPageAliase()=="")){
-            System.out.println(1111);
+        if((!StringUtils.isEmpty(request.getSiteId()))&&(StringUtils.isEmpty(request.getPageAliase()))){
             Optional<List<CmsPage>> o = cmsPageRepository.findBySiteId(request.getSiteId());
             if( o.isPresent() ){
-
                 List<CmsPage> list = o.get();
                 queryResult = new QueryResult<CmsPage>();
                 queryResult.setList(list);
                 queryResult.setTotal((long) list.size());
-
                 result = new QueryResponseResult(CommonCode.SUCCESS,queryResult);
             }
 
@@ -111,10 +112,26 @@ public class PageServiceImpl implements IPageService {
 
     @Override
     public QueryResponseResult add(CmsPage cmsPage) {
+
+        // 校验非法参数
+        if(ObjectUtils.isEmpty(cmsPage)){
+            ThrowException.exception(CommonCode.BAD_PARAMETERS);
+        }
+
+        // 校验页面是否已经存在
+        Optional<CmsPage> o = cmsPageRepository.findByPageNameAndSiteIdAndPageWebPath(cmsPage.getPageName(), cmsPage.getSiteId(), cmsPage.getPageWebPath());
+        if( o.isPresent() ){
+            CmsPage page = o.get();
+            if(!ObjectUtils.isEmpty(page)){
+                ThrowException.exception(CmsCode.CMS_ADDPAGE_EXISTSNAME);
+            }
+        }
+
         cmsPageRepository.save(cmsPage);
         QueryResult<CmsPage> queryResult = new QueryResult<CmsPage>();
         queryResult.setList(null);
         queryResult.setTotal(0L);
+
         return new  QueryResponseResult(CommonCode.SUCCESS,queryResult);
     }
 
@@ -174,11 +191,16 @@ public class PageServiceImpl implements IPageService {
             if( o.isPresent() ){
                 //如果 o 存在
                 CmsPage cmsPage = o.get();
-                return cmsPage;
+                if( ObjectUtils.isEmpty(cmsPage)){
+                    throw new CustomException(CmsCode.CMS_PAGE_NOT_FIND);
+                }else{
+                    return cmsPage;
+                }
             }else {
-                return null;
+                throw new CustomException(CommonCode.FAIL);
             }
         }else {
+            ThrowException.exception(CommonCode.BAD_PARAMETERS);
             return null;
         }
     }

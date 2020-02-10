@@ -1,0 +1,9 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: freemaker-test
+  freemarker:
+    cache: false
+    settings:
+      template_update_delay: 0  #检查模板更新延迟时间 为0则当数据模板改变时立即刷新

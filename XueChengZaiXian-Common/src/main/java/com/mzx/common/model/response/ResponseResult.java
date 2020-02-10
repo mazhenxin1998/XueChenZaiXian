@@ -4,6 +4,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 /**
  * @author ZhenXinMa
  * @date 2020/2/4 21:58
@@ -29,10 +32,13 @@ public class ResponseResult implements Response {
 
     String message;
 
+    LocalDateTime time;
+
     public ResponseResult(ResultCode resultCode){
         this.success = resultCode.success();
         this.code = resultCode.code();
         this.message = resultCode.message();
+        this.time = resultCode.time();
     }
 
     public static ResponseResult SUCCESS(){
