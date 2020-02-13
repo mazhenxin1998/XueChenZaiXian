@@ -1,7 +1,10 @@
 package com.mzx.framework.model.cms;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -13,17 +16,19 @@ import java.util.List;
  */
 @Data
 @ToString
+@Accessors(chain = true)
 @Document(collection = "cms_config")
+@ApiModel
 public class CmsConfig {
 
-    // 配置文件的ID
     @Id
+    @ApiModelProperty(value = "配置文件的ID")
     private String id;
 
-    //配置文件的名字
+    @ApiModelProperty(value = "配置文件的名字")
     private String name;
 
-    // 配置文件包含的model
+    @ApiModelProperty(value = "配置文件包含的model")
     private List<CmsConfigModel> model;
 
 }

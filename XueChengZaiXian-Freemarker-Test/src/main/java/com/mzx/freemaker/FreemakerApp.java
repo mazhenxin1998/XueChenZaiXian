@@ -2,15 +2,15 @@ package com.mzx.freemaker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @author ZhenXinMa
- * @date 2020/2/10 21:53
+ * @date 2020/2/11 14:09
  */
 @SpringBootApplication
-public class FreeMakerApp {
+public class FreemakerApp {
     public static void main(String[] args) {
-        SpringApplication.run(FreeMakerApp.class,args);
+        SpringApplication.run(FreemakerApp.class,args);
     }
 }

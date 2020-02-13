@@ -153,9 +153,11 @@ public class PageServiceImpl implements IPageService {
         Optional<CmsPage> o = cmsPageRepository.findById(pageID);
         if( o.isPresent() ){
             CmsPage cmsPage = o.get();
+
             cmsPage.setSiteId(request.getSiteId());
             cmsPage.setTemplateId(request.getTemplateId());
             cmsPage.setPageName(request.getPageName());
+
             if(!StringUtils.isEmpty(request.getPageAliase())){
                 cmsPage.setPageAliase(request.getPageAliase());
             }
@@ -173,6 +175,10 @@ public class PageServiceImpl implements IPageService {
                 cmsPage.setPageCreateTime(request.getPageCreateTime());
             }
 
+            if( !StringUtils.isEmpty(request.getDataUrl())){
+                cmsPage.setDataUrl(request.getDataUrl());
+            }
+            System.out.println(cmsPage);
             cmsPageRepository.save(cmsPage);
             List<CmsPage> list = new ArrayList<CmsPage>();
             list.add(cmsPage);
@@ -181,7 +187,6 @@ public class PageServiceImpl implements IPageService {
         }
         return new QueryResponseResult(CommonCode.SUCCESS,result);
     }
-
 
     @Override
     public CmsPage findByPageName(String name) {

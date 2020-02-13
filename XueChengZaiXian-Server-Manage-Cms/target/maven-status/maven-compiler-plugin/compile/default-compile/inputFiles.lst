@@ -1,5 +1,8 @@
+D:\Study\Java\IDEACode\MyProject\XueChengZaiXian\XueChengZaiXian-Server-Manage-Cms\src\main\java\com\mzx\server\managecms\controller\CmsConfigController.java
 D:\Study\Java\IDEACode\MyProject\XueChengZaiXian\XueChengZaiXian-Server-Manage-Cms\src\main\java\com\mzx\server\managecms\dao\CmsPageRepository.java
+D:\Study\Java\IDEACode\MyProject\XueChengZaiXian\XueChengZaiXian-Server-Manage-Cms\src\main\java\com\mzx\server\managecms\service\IPageConfigService.java
 D:\Study\Java\IDEACode\MyProject\XueChengZaiXian\XueChengZaiXian-Server-Manage-Cms\src\main\java\com\mzx\server\managecms\dao\CmsTemplateRepository.java
+D:\Study\Java\IDEACode\MyProject\XueChengZaiXian\XueChengZaiXian-Server-Manage-Cms\src\main\java\com\mzx\server\managecms\dao\CmsPageConfigRepository.java
 D:\Study\Java\IDEACode\MyProject\XueChengZaiXian\XueChengZaiXian-Server-Manage-Cms\src\main\java\com\mzx\server\managecms\dao\CmsSiteRepository.java
 D:\Study\Java\IDEACode\MyProject\XueChengZaiXian\XueChengZaiXian-Server-Manage-Cms\src\main\java\com\mzx\server\managecms\service\IPageService.java
 D:\Study\Java\IDEACode\MyProject\XueChengZaiXian\XueChengZaiXian-Server-Manage-Cms\src\main\java\com\mzx\server\managecms\service\impl\PageServiceImpl.java
@@ -7,6 +10,7 @@ D:\Study\Java\IDEACode\MyProject\XueChengZaiXian\XueChengZaiXian-Server-Manage-C
 D:\Study\Java\IDEACode\MyProject\XueChengZaiXian\XueChengZaiXian-Server-Manage-Cms\src\main\java\com\mzx\server\managecms\service\ISiteService.java
 D:\Study\Java\IDEACode\MyProject\XueChengZaiXian\XueChengZaiXian-Server-Manage-Cms\src\main\java\com\mzx\server\managecms\controller\CmsSiteController.java
 D:\Study\Java\IDEACode\MyProject\XueChengZaiXian\XueChengZaiXian-Server-Manage-Cms\src\main\java\com\mzx\server\managecms\controller\CmsTemplateController.java
+D:\Study\Java\IDEACode\MyProject\XueChengZaiXian\XueChengZaiXian-Server-Manage-Cms\src\main\java\com\mzx\server\managecms\service\impl\PageConfigServiceImpl.java
 D:\Study\Java\IDEACode\MyProject\XueChengZaiXian\XueChengZaiXian-Server-Manage-Cms\src\main\java\com\mzx\server\managecms\service\ITemplateService.java
 D:\Study\Java\IDEACode\MyProject\XueChengZaiXian\XueChengZaiXian-Server-Manage-Cms\src\main\java\com\mzx\server\managecms\ServerManageCmsApp.java
 D:\Study\Java\IDEACode\MyProject\XueChengZaiXian\XueChengZaiXian-Server-Manage-Cms\src\main\java\com\mzx\server\managecms\dao\StudentRepository.java

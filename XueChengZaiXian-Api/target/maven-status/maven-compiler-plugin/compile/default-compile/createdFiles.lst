@@ -1,3 +1,4 @@
+com\mzx\api\cms\CmsConfigControllerApi.class
 com\mzx\api\cms\CmsTemplateControllerApi.class
 com\mzx\api\cms\CmsPageControllerApi.class
 com\mzx\api\cmsconf\SwaggerConfig.class

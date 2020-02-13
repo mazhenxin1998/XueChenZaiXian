@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.mzx.server.managercms.dao.CmsPageConfigRepositoryTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.101 s - in com.mzx.server.managercms.dao.CmsPageConfigRepositoryTest

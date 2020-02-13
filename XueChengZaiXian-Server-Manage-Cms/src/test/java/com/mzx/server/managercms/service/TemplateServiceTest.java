@@ -22,8 +22,10 @@ public class TemplateServiceTest {
 
     @Test
     public void get(){
-        QueryResponseResult queryResponseResult = service.get();
+
+        QueryResponseResult result = service.get();
         System.out.println(1);
+
     }
 
 }
