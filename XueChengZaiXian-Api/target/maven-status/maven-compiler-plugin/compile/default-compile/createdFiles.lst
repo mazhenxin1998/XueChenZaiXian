@@ -1,6 +1,8 @@
 com\mzx\api\cms\CmsConfigControllerApi.class
-com\mzx\api\cms\CmsTemplateControllerApi.class
-com\mzx\api\cms\CmsPageControllerApi.class
 com\mzx\api\cmsconf\SwaggerConfig.class
+com\mzx\api\cms\CmsPreviewControllerApi.class
+com\mzx\api\cms\CmsTemplateControllerApi.class
+com\mzx\api\cms\CmsFileControllerApi.class
+com\mzx\api\cms\CmsPageControllerApi.class
 com\mzx\api\cms\CmsSiteControllerApi.class
 com\mzx\api\XueChengZaiXianApi.class

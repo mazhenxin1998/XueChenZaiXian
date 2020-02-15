@@ -1,8 +1,7 @@
 package com.mzx.api.cms;
 
-import com.mzx.common.model.response.CmsConfigQueryResult;
+
 import com.mzx.common.model.response.QueryResponseResult;
-import com.mzx.common.model.response.QueryResult;
 import com.mzx.common.model.response.ResponseResult;
 import com.mzx.framework.model.cms.CmsConfig;
 import io.swagger.annotations.Api;

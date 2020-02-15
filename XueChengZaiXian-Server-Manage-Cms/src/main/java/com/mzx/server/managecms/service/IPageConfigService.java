@@ -1,12 +1,10 @@
 package com.mzx.server.managecms.service;
 
-import com.mzx.common.model.response.CmsConfigQueryResult;
 import com.mzx.common.model.response.QueryResponseResult;
-import com.mzx.common.model.response.QueryResult;
 import com.mzx.common.model.response.ResponseResult;
 import com.mzx.framework.model.cms.CmsConfig;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
+
+
 
 /**
  * @author ZhenXinMa

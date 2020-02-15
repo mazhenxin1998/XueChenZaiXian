@@ -74,5 +74,9 @@ public interface IPageService {
      */
     QueryResponseResult update(CmsPage request,String pageID);
 
+    String getPageHtml(String pageID);
+
+    CmsPage getByID(String ID);
+
 
 }

@@ -1,3 +1,5 @@
+com\mzx\server\managercms\dao\CmsFileRepositoryTest.class
+com\mzx\server\managercms\dao\GirdFSTemplate.class
 com\mzx\server\managercms\service\TemplateServiceTest.class
 com\mzx\server\managercms\dao\CmsPageRepositoryTest.class
 com\mzx\server\managercms\service\CmsPageServiceTest.class

@@ -68,7 +68,7 @@ public class GirdFSTemplate {
     @Test
     public void get() throws IOException {
 
-        String id = "5e426e30ab23493928c486c7";
+        String id = "5b20e834da768829c4524bdd";
 
         // 根据ID查询文件
         GridFSFile file = template.findOne(Query.query(Criteria.where("_id").is(id)));

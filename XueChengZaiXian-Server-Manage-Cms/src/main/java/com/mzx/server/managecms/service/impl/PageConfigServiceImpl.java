@@ -32,14 +32,11 @@ public class PageConfigServiceImpl implements IPageConfigService {
         if(StringUtils.isEmpty(id)){
             ThrowException.exception(CommonCode.BAD_PARAMETERS);
         }
-
         CmsConfig config = null;
-
         Optional<CmsConfig> o = repository.findById(id);
         if( o.isPresent() ){
             CmsConfig cmsConfig = o.get();
             if(ObjectUtils.isEmpty(cmsConfig)){
-                // 如果查询出来的值是空  抛出异常
                 ThrowException.exception(CmsCode.CMS_NOT_THIS_CONFIG);
             }
            config = cmsConfig;

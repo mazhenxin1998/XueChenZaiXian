@@ -3,6 +3,12 @@ server:
 spring:
   application:
     name: freemaker-test
+  data:
+    mongodb:
+      # 副本集的连接字符串
+        uri: mongodb://114.55.37.2:27017,114.55.37.2:27018,114.55.37.2:27019/test?connect=replicaSet&slaveOk=true&replicaSet=myrs
+
+
   freemarker:
     cache: false
     settings:

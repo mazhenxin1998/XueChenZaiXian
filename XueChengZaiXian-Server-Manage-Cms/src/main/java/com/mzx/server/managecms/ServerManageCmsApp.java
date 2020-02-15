@@ -28,6 +28,4 @@ public class ServerManageCmsApp {
     public static void main(String[] args) {
         SpringApplication.run(ServerManageCmsApp.class,args);
     }
-
-
 }

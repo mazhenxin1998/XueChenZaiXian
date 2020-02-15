@@ -2,8 +2,10 @@ D:\Study\Java\IDEACode\MyProject\XueChengZaiXian\XueChengZaiXian-Server-Manage-C
 D:\Study\Java\IDEACode\MyProject\XueChengZaiXian\XueChengZaiXian-Server-Manage-Cms\src\test\java\com\mzx\server\managercms\service\CmsPageServiceTest.java
 D:\Study\Java\IDEACode\MyProject\XueChengZaiXian\XueChengZaiXian-Server-Manage-Cms\src\test\java\com\mzx\server\managercms\dao\CmsPageConfigRepositoryTest.java
 D:\Study\Java\IDEACode\MyProject\XueChengZaiXian\XueChengZaiXian-Server-Manage-Cms\src\test\java\com\mzx\server\managercms\dao\CmsSiteRepositoryTest.java
+D:\Study\Java\IDEACode\MyProject\XueChengZaiXian\XueChengZaiXian-Server-Manage-Cms\src\test\java\com\mzx\server\managercms\dao\CmsFileRepositoryTest.java
 D:\Study\Java\IDEACode\MyProject\XueChengZaiXian\XueChengZaiXian-Server-Manage-Cms\src\test\java\com\mzx\server\managercms\dao\CmsPageRepositoryTest.java
 D:\Study\Java\IDEACode\MyProject\XueChengZaiXian\XueChengZaiXian-Server-Manage-Cms\src\test\java\com\mzx\server\managercms\service\TemplateServiceTest.java
 D:\Study\Java\IDEACode\MyProject\XueChengZaiXian\XueChengZaiXian-Server-Manage-Cms\src\test\java\com\mzx\server\managercms\service\SiteServiceTest.java
 D:\Study\Java\IDEACode\MyProject\XueChengZaiXian\XueChengZaiXian-Server-Manage-Cms\src\test\java\com\mzx\server\managercms\dao\PageServiceImplTest.java
 D:\Study\Java\IDEACode\MyProject\XueChengZaiXian\XueChengZaiXian-Server-Manage-Cms\src\test\java\com\mzx\server\managercms\dao\CmsTemplateRepositoryTest.java
+D:\Study\Java\IDEACode\MyProject\XueChengZaiXian\XueChengZaiXian-Server-Manage-Cms\src\test\java\com\mzx\server\managercms\dao\GirdFSTemplate.java
