@@ -4,6 +4,7 @@ import com.mzx.api.cms.CmsPageControllerApi;
 import com.mzx.common.model.response.CommonCode;
 import com.mzx.common.model.response.QueryResponseResult;
 import com.mzx.common.model.response.QueryResult;
+import com.mzx.common.model.response.ResponseResult;
 import com.mzx.framework.model.cms.CmsPage;
 import com.mzx.framework.model.cms.Student;
 import com.mzx.framework.model.cms.requesed.AddPageRequest;
@@ -35,6 +36,17 @@ public class CmsPageController implements CmsPageControllerApi {
      */
     @Autowired
     private IPageService pageService;
+
+    /**
+     *   页面发布
+     * @param pageID
+     * @return
+     */
+    @Override
+    @PostMapping(value = "/post/publish/{pageID}")
+    public ResponseResult publishCmsPage(@PathVariable(value = "pageID") String pageID) {
+        return pageService.publishPage(pageID);
+    }
 
     @Override
     @GetMapping(value = "/list/{page}/{size}")

@@ -1,6 +1,7 @@
 package com.mzx.server.managecms.service;
 
 import com.mzx.common.model.response.QueryResponseResult;
+import com.mzx.common.model.response.ResponseResult;
 import com.mzx.framework.model.cms.CmsPage;
 import com.mzx.framework.model.cms.requesed.QueryPageRequest;
 
@@ -52,6 +53,7 @@ public interface IPageService {
      *  增加之前需要判断该页面是否存在
      * @param request
      * @return
+     * @since 1.8
      */
     QueryResponseResult add(CmsPage request);
 
@@ -77,6 +79,29 @@ public interface IPageService {
     String getPageHtml(String pageID);
 
     CmsPage getByID(String ID);
+
+    /**
+     *  根据ID发布页面到GridFS上.
+     *
+     * @param pageID
+     * @return
+     */
+    ResponseResult publishPage(String pageID);
+
+    /**
+     *
+     *  概要描述：根据页面ID和Content{@code String}类型页面模型+数据.
+     *
+     *  <p>
+     *      详细描述：将htmlContent保存到GridFS中，并且将保存的FileID更新到当前的cmsPage中.
+     *      注意：保存之前要查看GridFS中是否存在该文件 如果存在则删除,然后在进行保存.
+     *  </p>
+     *
+     * @param pageID
+     * @param htmlContent
+     * @return
+     */
+    CmsPage saveHtml(String pageID,String htmlContent);
 
 
 }

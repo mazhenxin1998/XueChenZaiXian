@@ -23,7 +23,8 @@ public enum  CommonCode implements ResultCode {
     UNAUTHENTICATED(false,10001,"此操作需要登陆系统！"),
     UNAUTHORISE(false,10002,"权限不足，无权操作！"),
     BAD_PARAMETERS(false,10003,"抱歉，请求参数错误 请重试"),
-    SERVER_ERROR(false,99999,"抱歉，系统繁忙，请稍后重试！");
+    SERVER_ERROR(false,99999,"抱歉，系统繁忙，请稍后重试！"),
+    THIS_PARAMETERS_NOT_LEGAL(false,10004,"抱歉，您传的参数所对应的信心不存在!");
     //    private static ImmutableMap<Integer, CommonCode> codes ;
 
     /**

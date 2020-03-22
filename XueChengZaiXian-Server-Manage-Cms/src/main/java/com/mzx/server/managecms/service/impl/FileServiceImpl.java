@@ -21,6 +21,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,7 +37,7 @@ public class FileServiceImpl implements IFileService {
     @Autowired
     private GridFsTemplate template;
 
-    @Autowired
+    @Resource
     private GridFSBucket bucket;
 
     @Autowired

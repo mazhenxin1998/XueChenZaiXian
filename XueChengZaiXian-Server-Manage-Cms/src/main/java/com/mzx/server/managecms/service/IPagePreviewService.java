@@ -8,4 +8,11 @@ public interface IPagePreviewService {
 
     String preview(String pageID);
 
+    /**
+     *  将页面文件进行静态化
+     * @param pageID
+     * @return
+     */
+    String generateHtml(String pageID);
+
 }

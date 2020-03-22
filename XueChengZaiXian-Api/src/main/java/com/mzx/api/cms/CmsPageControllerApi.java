@@ -2,6 +2,7 @@ package com.mzx.api.cms;
 
 
 import com.mzx.common.model.response.QueryResponseResult;
+import com.mzx.common.model.response.ResponseResult;
 import com.mzx.framework.model.cms.CmsPage;
 import com.mzx.framework.model.cms.requesed.AddPageRequest;
 import com.mzx.framework.model.cms.requesed.QueryPageRequest;
@@ -44,5 +45,8 @@ public interface CmsPageControllerApi {
 
     @ApiOperation(value = "修改CMS页面")
     public QueryResponseResult update(CmsPage request,String pageID);
+
+    @ApiOperation(value = "页面发布")
+    public ResponseResult publishCmsPage(String pageID);
 
 }

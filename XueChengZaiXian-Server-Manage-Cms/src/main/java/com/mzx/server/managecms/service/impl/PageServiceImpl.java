@@ -8,18 +8,22 @@ import com.mzx.common.exception.ThrowException;
 import com.mzx.common.model.response.CommonCode;
 import com.mzx.common.model.response.QueryResponseResult;
 import com.mzx.common.model.response.QueryResult;
+import com.mzx.common.model.response.ResponseResult;
 import com.mzx.framework.model.cms.CmsPage;
 import com.mzx.framework.model.cms.CmsTemplate;
 import com.mzx.framework.model.cms.requesed.QueryPageRequest;
 import com.mzx.framework.model.cms.response.CmsCode;
 import com.mzx.server.managecms.dao.CmsPageRepository;
 import com.mzx.server.managecms.dao.CmsTemplateRepository;
+import com.mzx.server.managecms.mqproducer.IMessageProduceSender;
 import com.mzx.server.managecms.service.IPageService;
 import freemarker.cache.StringTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import jdk.internal.util.xml.impl.Input;
 import org.apache.commons.io.IOUtils;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -37,10 +41,8 @@ import org.springframework.web.client.RestTemplate;
 import sun.security.krb5.Config;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.io.InputStream;
+import java.util.*;
 
 
 /**
@@ -55,6 +57,9 @@ public class PageServiceImpl implements IPageService {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    private IMessageProduceSender messageSender;
 
     @Autowired
     private CmsTemplateRepository cmsTemplateRepository;
@@ -255,6 +260,66 @@ public class PageServiceImpl implements IPageService {
         return null;
     }
 
+    @Override
+    public ResponseResult publishPage(String pageID) {
+
+        if( StringUtils.isEmpty(pageID) ){
+            ThrowException.exception(CommonCode.BAD_PARAMETERS);
+        }
+        CmsPage page = this.getByID(pageID);
+        if( page == null ){
+            ThrowException.exception(CmsCode.CMS_PAGE_NOT_FIND);
+        }
+        String content = this.getPageHtml(pageID);
+        if( StringUtils.isEmpty(content) ){
+            ThrowException.exception(CmsCode.CMS_PAGE_NOT_FIND);
+        }
+
+        // 将静态文件保存到GridFS上  并将保存后返回的HTML 作为值修改page的htmlFileID
+        CmsPage cmsPage = this.saveHtml(pageID, content);
+        cmsPageRepository.save(cmsPage);
+
+        Map<String,Object> message = new HashMap<>();
+        message.put("pageID",cmsPage.getId());
+        Map<String,Object> properties = new HashMap<>();
+        // 向MQ发送消息
+        messageSender.sendMessage(message,properties);
+
+        return ResponseResult.SUCCESS();
+    }
+
+    /**
+     *
+     *  将该字符串所表示的HTML页面发布到GridFS上
+     *
+     *  存储之前需要先看看pageID对应的html页面是否存在
+     * @param pageID
+     * @param htmlContent
+     * @return
+     */
+    @Override
+    public CmsPage saveHtml(String pageID, String htmlContent) {
+
+        CmsPage page = this.getByID(pageID);
+        if( ObjectUtils.isEmpty(page) ){
+            ThrowException.exception(CmsCode.CMS_PAGE_NOT_FIND);
+        }
+        if(!StringUtils.isEmpty(page.getHtmlFileId())){
+            gridFsTemplate.delete(Query.query(Criteria.where("_id").is(page.getHtmlFileId())));
+        }
+
+        InputStream inputStream = null;
+        try {
+            inputStream = IOUtils.toInputStream(htmlContent,"utf-8");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ObjectId objectId = gridFsTemplate.store(inputStream, page.getPageName());
+        page.setHtmlFileId(objectId.toString());
+
+        return page;
+    }
+
     /**
      * @param page             第几页
      * @param size             每个页面上的数量
@@ -417,6 +482,7 @@ public class PageServiceImpl implements IPageService {
 
         return body;
     }
+
 
 
 }

@@ -2,6 +2,7 @@ package com.mzx.framework.model.cms;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
@@ -40,5 +41,8 @@ public class CmsSite {
 
     @ApiModelProperty( value = "创建时间")
     private Date siteCreateTime;
+
+    @ApiModelProperty( value = "站点物理路径")
+    private String sitePhysicalPath;
 
 }

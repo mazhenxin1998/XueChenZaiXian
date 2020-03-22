@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -9,6 +10,7 @@
         <module name="XueChengZaiXian-Api" />
         <module name="XueChengZaiXian-Server-Manage-Cms" />
         <module name="XueChengZaiXian-Freemarker-Test" />
+        <module name="XueChengZaiXian-Server-CmsClient" />
         <module name="XueChengZaiXian-Common" />
         <module name="XueChengZaiXian-Model" />
         <module name="XueChengZaiXian-Util" />
@@ -20,6 +22,7 @@
       <module name="XueChengZaiXian-Common" target="1.8" />
       <module name="XueChengZaiXian-Freemarker-Test" target="1.8" />
       <module name="XueChengZaiXian-Model" target="1.8" />
+      <module name="XueChengZaiXian-Server-CmsClient" target="1.8" />
       <module name="XueChengZaiXian-Server-Manage-Cms" target="1.8" />
       <module name="XueChengZaiXian-Util" target="1.8" />
     </bytecodeTargetLevel>

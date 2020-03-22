@@ -60,7 +60,7 @@ public class PagePreviewServiceImpl implements IPagePreviewService {
 
     @Override
     public String preview(String pageID) {
-        System.out.println("service中"+pageID);
+
         String content = "";
         if( StringUtils.isEmpty(pageID)){
             ThrowException.exception(CommonCode.BAD_PARAMETERS);
@@ -79,17 +79,20 @@ public class PagePreviewServiceImpl implements IPagePreviewService {
     /**
      *  静态化
      */
+    @Override
     public String generateHtml(String pageID){
-
+        //   获取数据模型
         Map map = this.getMap(pageID);
         if( map == null ){
             ThrowException.exception(CmsCode.CMS_GENERATEHTML_DATAURLISNULL);
         }
+        // 获取模板字符串 从GridFS中获取模板文件 并转换为字符串
         String content = this.content(pageID);
         if( StringUtils.isEmpty(content) ){
             ThrowException.exception(CmsCode.CMS_GENERATEHTML_TEMPLATEISNULL);
         }
 
+        // 静态化
         Configuration configuration = new Configuration(Configuration.getVersion());
         StringTemplateLoader loader = new StringTemplateLoader();
         loader.putTemplate("template",content);
