@@ -25,5 +25,6 @@ public class QueryResult<T> {
      */
     private Long total;
 
+    private T data;
 
 }

@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="XueChengZaiXian-Api" />
         <module name="XueChengZaiXian-Server-Manage-Cms" />
+        <module name="xuechengzaixian-server-manager-course" />
         <module name="XueChengZaiXian-Freemarker-Test" />
         <module name="XueChengZaiXian-Server-CmsClient" />
         <module name="XueChengZaiXian-Common" />
@@ -24,6 +25,7 @@
       <module name="XueChengZaiXian-Model" target="1.8" />
       <module name="XueChengZaiXian-Server-CmsClient" target="1.8" />
       <module name="XueChengZaiXian-Server-Manage-Cms" target="1.8" />
+      <module name="xuechengzaixian-server-manager-course" target="1.8" />
       <module name="XueChengZaiXian-Util" target="1.8" />
     </bytecodeTargetLevel>
   </component>

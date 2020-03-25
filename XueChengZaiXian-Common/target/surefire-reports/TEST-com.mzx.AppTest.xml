@@ -26,14 +26,15 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 10"/>
-    <property name="maven.ext.class.path" value="D:\StudyInstrument\IDEA\IntelliJ IDEA 2019.2.2\plugins\maven\lib\maven-event-listener.jar"/>
+    <property name="maven.ext.class.path" value="D:\StudyInstrument\IDEA\19.4\IntelliJ IDEA 2019.3.4\plugins\maven\lib\maven-event-listener.jar"/>
     <property name="classworlds.conf" value="D:\Maven\apache-maven-3.5.2\bin\m2.conf"/>
     <property name="sun.jnu.encoding" value="GBK"/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_191\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;D:\StudyInstrument\XFTP6\xftp6\;C:\Program Files (x86)\NetSarang\Xshell 6\;D:\Maven\apache-maven-3.5.2\bin;D:\StudyInstrument\SVNServler\bin;D:\StudyInstrument\SVNClient\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;%QUARTUS_ROOTDIR%\bin;D:\StudyInstrument\UMLGraphviz\bin;D:\StudyInstrument\Node\;&quot;D:\StudyInstrument\Node;D:\StudyInstrument\Node\npm_modules&quot;;D:\StudyInstrument\Node\npm_modules;D:\Study\Web\VSCodeCode\XueChengZaiXian\xc-ui-pc-static-portal\webpack02\node_modules\.bin;D:\StudyInstrument\Grade\gradle-6.1.1\bin;C:\Users\lenovo\AppData\Local\Microsoft\WindowsApps;D:\maven\apache-maven-3.6.2\bin;C:\Program Files\Java\jdk1.8.0_191\bin;C:\Users\lenovo\AppData\Local\GitHubDesktop\bin;D:\StudyInstrument\VsCode\Microsoft VS Code\bin;C:\Users\lenovo\AppData\Roaming\npm;."/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_191\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;D:\StudyInstrument\XFTP6\xftp6\;C:\Program Files (x86)\NetSarang\Xshell 6\;D:\Maven\apache-maven-3.5.2\bin;D:\StudyInstrument\SVNServler\bin;D:\StudyInstrument\SVNClient\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;%QUARTUS_ROOTDIR%\bin;D:\StudyInstrument\UMLGraphviz\bin;D:\StudyInstrument\Node\;&quot;D:\StudyInstrument\Node;D:\StudyInstrument\Node\npm_modules&quot;;D:\StudyInstrument\Node\npm_modules;D:\Study\Web\VSCodeCode\XueChengZaiXian\xc-ui-pc-static-portal\webpack02\node_modules\.bin;D:\StudyInstrument\Grade\gradle-6.1.1\bin;D:\StudyInstrument\pycharm\packeg\packegs\Scripts;D:\Anaconda;D:\Anaconda\Library\mingw-w64\bin;D:\Anaconda\Library\usr\bin;D:\Anaconda\Library\bin;D:\Anaconda\Scripts;C:\Users\lenovo\AppData\Local\Microsoft\WindowsApps;D:\maven\apache-maven-3.6.2\bin;C:\Program Files\Java\jdk1.8.0_191\bin;C:\Users\lenovo\AppData\Local\GitHubDesktop\bin;D:\StudyInstrument\VsCode\Microsoft VS Code\bin;C:\Users\lenovo\AppData\Roaming\npm;D:\Recreation\压缩软件\bandizip\;."/>
     <property name="maven.conf" value="D:\Maven\apache-maven-3.5.2/conf"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="idea.version2019.3.4" value="true"/>
     <property name="os.version" value="10.0"/>
     <property name="user.home" value="C:\Users\lenovo"/>
     <property name="user.timezone" value="Asia/Shanghai"/>
@@ -41,11 +42,11 @@
     <property name="java.specification.version" value="1.8"/>
     <property name="file.encoding" value="GB2312"/>
     <property name="user.name" value="lenovo"/>
-    <property name="java.class.path" value="D:\Maven\apache-maven-3.5.2\boot\plexus-classworlds-2.5.2.jar;D:\StudyInstrument\IDEA\IntelliJ IDEA 2019.2.2\lib\idea_rt.jar"/>
+    <property name="java.class.path" value="D:\Maven\apache-maven-3.5.2\boot\plexus-classworlds-2.5.2.jar;D:\StudyInstrument\IDEA\19.4\IntelliJ IDEA 2019.3.4\lib\idea_rt.jar"/>
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_191\jre"/>
-    <property name="sun.java.command" value="org.codehaus.classworlds.Launcher -Didea.version2019.3 -s D:\Maven\apache-maven-3.5.2\conf\settings.xml install"/>
+    <property name="sun.java.command" value="org.codehaus.classworlds.Launcher -Didea.version2019.3.4 -s D:\Maven\apache-maven-3.5.2\conf\settings.xml install"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="zh"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -56,7 +57,6 @@
     <property name="java.vendor" value="Oracle Corporation"/>
     <property name="maven.home" value="D:\Maven\apache-maven-3.5.2"/>
     <property name="file.separator" value="\"/>
-    <property name="idea.version2019.3" value="true"/>
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>

@@ -13,6 +13,7 @@
         <module>XueChengZaiXian-Server-Manage-Cms</module>
         <module>XueChengZaiXian-Freemarker-Test</module>
         <module>XueChengZaiXian-Server-CmsClient</module>
+        <module>xuechengzaixian-server-manager-course</module>
     </modules>
 
     <groupId>com.mzx</groupId>

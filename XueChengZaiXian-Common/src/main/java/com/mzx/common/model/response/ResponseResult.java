@@ -6,6 +6,7 @@ import lombok.ToString;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author ZhenXinMa
@@ -18,7 +19,7 @@ import java.time.LocalDateTime;
 @Data
 @ToString
 @NoArgsConstructor
-public class ResponseResult implements Response {
+public class ResponseResult<T> implements Response {
 
     /**
      * 当前操作是否成功
@@ -33,6 +34,8 @@ public class ResponseResult implements Response {
     String message;
 
     LocalDateTime time;
+
+    List<T> data;
 
     public ResponseResult(ResultCode resultCode){
         this.success = resultCode.success();

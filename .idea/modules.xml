@@ -10,6 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/XueChengZaiXian-Server-CmsClient/XueChengZaiXian-Server-CmsClient.iml" filepath="$PROJECT_DIR$/XueChengZaiXian-Server-CmsClient/XueChengZaiXian-Server-CmsClient.iml" />
       <module fileurl="file://$PROJECT_DIR$/XueChengZaiXian-Server-Manage-Cms/XueChengZaiXian-Server-Manage-Cms.iml" filepath="$PROJECT_DIR$/XueChengZaiXian-Server-Manage-Cms/XueChengZaiXian-Server-Manage-Cms.iml" />
       <module fileurl="file://$PROJECT_DIR$/XueChengZaiXian-Util/XueChengZaiXian-Util.iml" filepath="$PROJECT_DIR$/XueChengZaiXian-Util/XueChengZaiXian-Util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xuechengzaixian-server-manager-course/xuechengzaixian-server-manager-course.iml" filepath="$PROJECT_DIR$/xuechengzaixian-server-manager-course/xuechengzaixian-server-manager-course.iml" />
     </modules>
   </component>
 </project>
