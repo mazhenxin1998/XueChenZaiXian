@@ -24,31 +24,31 @@ public class TeachPlan implements Serializable {
     @ApiModelProperty(value = "课程计划ID")
     private String id;
 
-    @ApiModelProperty(value = "课程计划名字")
+    @ApiModelProperty(value = "课程计划名字1")
     private String pname;
 
-    @ApiModelProperty(value = "该课程计划是否有父节点")
+    @ApiModelProperty(value = "该课程计划是否有父节点1")
     private String parentid;
 
     @ApiModelProperty(value = "成绩")
     private String grade;
 
-    @ApiModelProperty(value = "当前课程计划的类型")
+    @ApiModelProperty(value = "当前课程计划的类型1")
     private String ptype;
 
-    @ApiModelProperty(value = "课程计划的描述")
+    @ApiModelProperty(value = "课程计划的描述1")
     private String description;
 
     @ApiModelProperty(value = "课程ID")
     private String courseid;
 
-    @ApiModelProperty(value = "当前课程计划的状态")
+    @ApiModelProperty(value = "当前课程计划的状态1")
     private String status;
 
-    @ApiModelProperty(value = "XXX")
-    private Integer orderby;
+    @ApiModelProperty(value = "排序字段1")
+    private String orderby;
 
-    @ApiModelProperty(value = "XXX")
+    @ApiModelProperty(value = "XXX1")
     private Double timelength;
 
     @ApiModelProperty(value = "XXX")

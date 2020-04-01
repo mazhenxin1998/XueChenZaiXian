@@ -13,6 +13,10 @@ public interface ITeachPlanService {
 
     QueryResponseResult get(String courseID);
 
-    ResponseResult add(@RequestBody TeachPlan teachPlan);
+    ResponseResult add(TeachPlan teachPlan);
+
+    ResponseResult delete(String ID);
+
+    ResponseResult update();
 
 }

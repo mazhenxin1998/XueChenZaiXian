@@ -21,5 +21,10 @@ public interface ITeachPlanControllerApi {
     @ApiOperation(value = "添加课程计划")
     ResponseResult add(TeachPlan teachPlan);
 
+    @ApiOperation(value = "删除节点")
+    @ApiImplicitParam(name = "id",value = "要删除节点的ID",required = true,paramType = "path",dataType = "String")
+    ResponseResult delete(String id);
+
+    ResponseResult update();
 
 }

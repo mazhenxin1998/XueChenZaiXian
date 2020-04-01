@@ -34,10 +34,24 @@ public class TeachPlanController implements ITeachPlanControllerApi {
 
 
     @Override
-    @PostMapping(value = "/add")
-    public ResponseResult add(@RequestBody TeachPlan teachPlan) {
+    @GetMapping(value = "/delete/{id}")
+    public ResponseResult delete(@PathVariable(value = "id") String id) {
+        log.info("---------------DELETE Course ID"+id);
+        System.out.println(id);
+        return teachPlanService.delete(id);
+    }
+
+    @Override
+    public ResponseResult update() {
         return null;
     }
 
+    @Override
+    @PostMapping(value = "/add")
+    public ResponseResult add(@RequestBody TeachPlan teachPlan) {
+        log.info("--------------------------TeachPlanController中add{@RequestBody TeachPlan teachPlan} 方法执行了"+teachPlan);
+        System.out.println(teachPlan);
+        return teachPlanService.add(teachPlan);
+    }
 
 }

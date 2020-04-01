@@ -20,11 +20,10 @@ public enum CourseCode implements ResultCode {
     COURSE_PUBLISH_VIEWERROR(false,31005,"发布课程视图出错！"),
     COURSE_MEDIS_URLISNULL(false,31101,"选择的媒资文件访问地址为空！"),
     COURSE_MEDIS_NAMEISNULL(false,31102,"选择的媒资文件名称为空！"),
-    COURSE_BAD_PARAMETER_IS_NULL(false,331103,"请重新选择参数，该参数对应的信息不存在");
-
+    COURSE_BAD_PARAMETER_IS_NULL(false,331103,"请重新选择参数，该参数对应的信息不存在"),
+    COURSE_CATEGORY_IS_NULL(false,331104,"课程分类为空,请先增加课程分类!");
 
     boolean success;
-
 
     int code;
 

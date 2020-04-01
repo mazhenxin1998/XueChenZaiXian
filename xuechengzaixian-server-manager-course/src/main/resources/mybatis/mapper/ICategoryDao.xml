@@ -2,8 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mzx.servermanager.dao.ICategoryDao">
 
+
+    <resultMap id="categoryNode" type="com.mzx.framework.model.course.ext.CategoryNode">
+        <id column="one_id" property="id"></id>
+        <result column="one_name" property="name"></result>
+        <collection property="children" ofType="com.mzx.framework.model.course.ext.CategoryNode">
+            <id column="two_id" property="id"></id>
+            <result column="two_name" property="name"></result>
+            <collection property="children" ofType="com.mzx.framework.model.course.ext.CategoryNode">
+                <id column="three_id" property="id"></id>
+                <result column="three_name" property="name"></result>
+            </collection>
+        </collection>
+    </resultMap>
+
     <select id="getAll" resultType="com.mzx.framework.model.course.Category">
-        select * from category;
+        select c.id,c.name,c.label,c.parentid,c.isshow,c.orderby,c.isleaf from category as c;
+    </select>
+
+    <select id="get" resultMap="categoryNode">
+        SELECT a.id AS one_id,a.name AS one_name,
+        b.id AS two_id,b.name AS two_name,
+        c.id AS three_id,c.name AS three_name
+        FROM category AS a LEFT JOIN category b ON b.`parentid` = a.`id`
+        LEFT JOIN category c ON c.`parentid` = b.`id`
+        WHERE a.`id` = '1'
+        ORDER BY a.`orderby`,b.`orderby`,c.`orderby`;
     </select>
 
 </mapper>

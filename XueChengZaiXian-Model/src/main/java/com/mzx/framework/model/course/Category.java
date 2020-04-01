@@ -13,8 +13,9 @@ import java.io.Serializable;
 @Data
 @ToString
 public class Category implements Serializable {
+
     private static final long serialVersionUID = -906357110051689484L;
-    @Id
+
     private String id;
     private String name;
     private String label;

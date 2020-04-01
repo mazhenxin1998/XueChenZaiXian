@@ -16,15 +16,15 @@
     </resultMap>
 
 
-    <select id="getNodeByID" resultMap="getNodeMap">
-        SELECT a.id one_id,a.pname one_name ,
-        b.id two_id,b.pname two_name,
-        c.`id` three_id,c.`pname` three_name
-        FROM teachplan a LEFT JOIN teachplan b ON a.id = b.`parentid`
-        LEFT JOIN teachplan c ON c.`parentid` = b.`id`
-        WHERE a.`parentid`=0 AND a.`courseid`=#{id}
-        ORDER BY a.`orderby`,b.`orderby`,c.`orderby`;
-    </select>
+<!--    <select id="getNodeByID" resultMap="getNodeMap">-->
+<!--        SELECT a.id one_id,a.pname one_name ,-->
+<!--        b.id two_id,b.pname two_name,-->
+<!--        c.`id` three_id,c.`pname` three_name-->
+<!--        FROM teachplan a LEFT JOIN teachplan b ON a.id = b.`parentid`-->
+<!--        LEFT JOIN teachplan c ON c.`parentid` = b.`id`-->
+<!--        WHERE a.`parentid`=0 AND a.`courseid`=#{id}-->
+<!--        ORDER BY a.`orderby`,b.`orderby`,c.`orderby`;-->
+<!--    </select>-->
 
     <select id="getNode" resultMap="getNodeMap">
         SELECT a.id one_id,a.pname one_name ,
@@ -44,4 +44,26 @@
         WHERE a.`parentid`=0 AND a.`courseid`=#{courseID}
         ORDER BY a.`orderby`,b.`orderby`,c.`orderby`;
     </select>
+
+    <insert id="add" parameterType="com.mzx.framework.model.course.TeachPlan" useGeneratedKeys="true" keyColumn="id">
+        insert into
+        teachplan(id,courseid,pname,parentid,grade,status,ptype,description,orderby,timelength)
+        values
+        (#{teachPlan.id},#{teachPlan.courseid},#{teachPlan.pname},#{teachPlan.parentid},#{teachPlan.grade},#{teachPlan.status},
+        #{teachPlan.ptype},#{teachPlan.description},#{teachPlan.orderby},#{teachPlan.timelength});
+    </insert>
+
+    <select id="findByTeachPlanRoot" resultType="com.mzx.framework.model.course.TeachPlan">
+        SELECT t.`id`,t.`pname`,t.`grade`,t.`ptype`,t.`description`,t.`courseid`,t.`status`,t.`orderby`,t.`timelength`,t.`trylearn`
+        FROM teachplan t WHERE t.`courseid`=#{courseID} AND t.`parentid`='0';
+    </select>
+
+    <select id="getByID" resultType="com.mzx.framework.model.course.TeachPlan">
+        select * from teachplan where id = #{id};
+    </select>
+
+    <delete id="delete" parameterType="string">
+        DELETE FROM teachplan WHERE id =#{id};
+    </delete>
+
 </mapper>
