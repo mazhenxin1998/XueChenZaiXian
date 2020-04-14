@@ -6,10 +6,25 @@ spring:
   data:
     mongodb:
       # 副本集的连接字符串
-        uri: mongodb://114.55.37.2:27017,114.55.37.2:27018,114.55.37.2:27019/test?connect=replicaSet&slaveOk=true&replicaSet=myrs
-
-
+        uri: mongodb://localhost
+        database: xc_cms
   freemarker:
     cache: false
     settings:
       template_update_delay: 0  #检查模板更新延迟时间 为0则当数据模板改变时立即刷新
+    suffix: .ftl
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.144.198.148:8848
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+ribbon:
+  okhttp:
+    enabled: true
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+

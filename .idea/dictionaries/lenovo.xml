@@ -2,8 +2,13 @@
   <dictionary name="lenovo">
     <words>
       <w>alibaba</w>
+      <w>freemaker</w>
       <w>nacos</w>
       <w>pagehelper</w>
+      <w>servermanager</w>
+      <w>ucenter</w>
+      <w>ucloud</w>
+      <w>xuechengzaixian</w>
     </words>
   </dictionary>
 </component>

@@ -1,6 +1,8 @@
 package com.mzx.framework.model.course;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
 
@@ -13,9 +15,12 @@ import java.util.Date;
  */
 @Data
 @ToString
+@Getter
+@Setter
 public class CourseMarket implements Serializable {
+
     private static final long serialVersionUID = -916357110051689486L;
-    @Id
+
     private String id;
     private String charge;
     private String valid;
@@ -25,6 +30,7 @@ public class CourseMarket implements Serializable {
     /**
      * private Date expires.
      */
+    private Date expires;
     private Date startTime;
     private Date endTime;
 

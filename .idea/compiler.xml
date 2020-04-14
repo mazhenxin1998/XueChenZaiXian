@@ -7,14 +7,20 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="xuechengzaixian-openfeign-test2" />
         <module name="XueChengZaiXian-Api" />
         <module name="XueChengZaiXian-Server-Manage-Cms" />
+        <module name="xuechengzaixina-openfeign-client-test" />
+        <module name="XueChengZaiXian-Util" />
+        <module name="xuechengzaixian-login" />
+        <module name="xuechengzaixian-openfign-test" />
+        <module name="xuechengzaixina-fastdfs-test" />
         <module name="xuechengzaixian-server-manager-course" />
-        <module name="XueChengZaiXian-Freemarker-Test" />
         <module name="XueChengZaiXian-Server-CmsClient" />
         <module name="XueChengZaiXian-Common" />
         <module name="XueChengZaiXian-Model" />
-        <module name="XueChengZaiXian-Util" />
+        <module name="XueChengZaiXian-Freemarker-Test" />
+        <module name="xuechengzaixina-filesystem" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -22,11 +28,17 @@
       <module name="XueChengZaiXian-Api" target="1.8" />
       <module name="XueChengZaiXian-Common" target="1.8" />
       <module name="XueChengZaiXian-Freemarker-Test" target="1.8" />
+      <module name="xuechengzaixian-login" target="1.8" />
       <module name="XueChengZaiXian-Model" target="1.8" />
+      <module name="xuechengzaixian-openfeign-test2" target="1.8" />
+      <module name="xuechengzaixian-openfign-test" target="1.8" />
       <module name="XueChengZaiXian-Server-CmsClient" target="1.8" />
       <module name="XueChengZaiXian-Server-Manage-Cms" target="1.8" />
       <module name="xuechengzaixian-server-manager-course" target="1.8" />
       <module name="XueChengZaiXian-Util" target="1.8" />
+      <module name="xuechengzaixina-fastdfs-test" target="1.8" />
+      <module name="xuechengzaixina-filesystem" target="1.8" />
+      <module name="xuechengzaixina-openfeign-client-test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

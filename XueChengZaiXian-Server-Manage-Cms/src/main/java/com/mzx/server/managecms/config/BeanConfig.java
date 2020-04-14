@@ -14,9 +14,9 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class BeanConfig {
 
-        @Bean
-        public RestTemplate get(){
-            return new RestTemplate(new OkHttp3ClientHttpRequestFactory());
-        }
+    @Bean
+    public RestTemplate get() {
+        return new RestTemplate(new OkHttp3ClientHttpRequestFactory());
+    }
 
 }

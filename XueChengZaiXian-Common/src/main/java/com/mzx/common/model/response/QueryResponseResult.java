@@ -1,7 +1,10 @@
 package com.mzx.common.model.response;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import java.io.Serializable;
 
 /**
  * @author ZhenXinMa
@@ -9,7 +12,8 @@ import lombok.ToString;
  */
 @Data
 @ToString
-public class QueryResponseResult extends ResponseResult {
+@NoArgsConstructor
+public class QueryResponseResult extends ResponseResult implements Serializable {
 
     QueryResult queryResult;
 

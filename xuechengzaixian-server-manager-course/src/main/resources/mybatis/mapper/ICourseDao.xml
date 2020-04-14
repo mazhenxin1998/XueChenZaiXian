@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mzx.servermanager.dao.ICourseDao">
+
+    <select id="getInfo" resultType="com.mzx.framework.model.course.ext.CourseInfo">
+        SELECT
+        course_base.*,
+        (SELECT pic FROM course_pic WHERE courseid = course_base.id) pic
+        FROM
+        course_base
+    </select>
+
+    <select id="get" resultType="com.mzx.framework.model.course.CourseBase">
+        select * from course_base
+    </select>
+<!--查询的我的课程首页-->
+<!--    <select id="getPageInfo" resultType="com.mzx.framework.model.course.ext.CourseInfo">-->
+<!--&lt;!&ndash;        SELECT&ndash;&gt;-->
+<!--&lt;!&ndash;        course_base.*,&ndash;&gt;-->
+<!--&lt;!&ndash;        (SELECT distinct pic FROM course_pic WHERE courseid = course_base.id) pic&ndash;&gt;-->
+<!--&lt;!&ndash;        FROM&ndash;&gt;-->
+<!--&lt;!&ndash;        course_base&ndash;&gt;-->
+<!--        SELECT-->
+<!--        course_base.*,-->
+<!--        (SELECT DISTINCT pic FROM course_pic WHERE courseid = course_base.id) pic-->
+<!--        FROM-->
+<!--        course_base ORDER BY id-->
+<!--        LIMIT #{page},#{size};-->
+<!--    </select>-->
+
+    <select id="getPageInfo" resultType="com.mzx.framework.model.course.ext.CourseInfo">
+        <!--        SELECT-->
+        <!--        course_base.*,-->
+        <!--        (SELECT distinct pic FROM course_pic WHERE courseid = course_base.id) pic-->
+        <!--        FROM-->
+        <!--        course_base-->
+        SELECT
+        course_base.*
+        FROM
+        course_base ORDER BY id
+        LIMIT #{page},#{size};
+    </select>
+
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(*) from course_base;
+    </select>
+</mapper>

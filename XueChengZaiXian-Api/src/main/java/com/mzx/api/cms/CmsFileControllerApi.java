@@ -15,8 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 public interface CmsFileControllerApi {
 
     /**
-     *  上传CMS文件
-     * @param file
+     *  增加CmsTemplate File文件接口.
+     *
+     *  文件存在MongoDB中的GridFS文件存储系统.
+     *  其中文件名字就是上传的时候文件的名字.
+     * @param file 要上传的模板文件.
      * @param request
      * @return
      */

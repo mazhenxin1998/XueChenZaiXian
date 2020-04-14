@@ -13,8 +13,9 @@ import java.io.Serializable;
 @Data
 @ToString
 public class CourseBase implements Serializable {
+
     private static final long serialVersionUID = -916357110051689486L;
-    @Id
+
     private String id;
     private String name;
     private String users;

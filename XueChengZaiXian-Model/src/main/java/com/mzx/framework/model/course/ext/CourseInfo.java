@@ -12,5 +12,7 @@ import lombok.ToString;
 public class CourseInfo {
 
     private String pic;
+    private String name;
+    private String id;
 
 }

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mzx.servermanager.dao.ICoursePicDao">
+
+    <insert id="add">
+        insert into
+        course_pics(courseid,pic,filename,status)
+        values
+        (#{courseID},#{url},#{fileName},#{status});
+    </insert>
+
+    <update id="update" parameterType="list">
+        update
+        course_pics
+        set
+        status = '0'
+        where courseid in
+        <foreach collection="list" item="item" open="(" close=")" index="index" separator=",">
+            #{item.courseid}
+        </foreach>
+    </update>
+
+    <delete id="delete">
+        delete from
+        course_pics
+        where
+        courseid = #{courseID}
+        and
+        filename = #{fileName};
+    </delete>
+
+    <select id="getListByCourseID" resultType="com.mzx.framework.model.course.CoursePic">
+        select
+        course_pics.courseid,course_pics.pic,course_pics.filename,course_pics.status
+        from
+        course_pics where courseid = #{courseID};
+    </select>
+
+    <select id="getCoursePicUsing" resultType="com.mzx.framework.model.course.CoursePic">
+        select * from
+        course_pics
+        where
+        courseid = #{courseID}
+        and
+        status='1';
+    </select>
+
+</mapper>

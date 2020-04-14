@@ -21,7 +21,9 @@ public enum CourseCode implements ResultCode {
     COURSE_MEDIS_URLISNULL(false,31101,"选择的媒资文件访问地址为空！"),
     COURSE_MEDIS_NAMEISNULL(false,31102,"选择的媒资文件名称为空！"),
     COURSE_BAD_PARAMETER_IS_NULL(false,331103,"请重新选择参数，该参数对应的信息不存在"),
-    COURSE_CATEGORY_IS_NULL(false,331104,"课程分类为空,请先增加课程分类!");
+    COURSE_CATEGORY_IS_NULL(false,331104,"课程分类为空,请先增加课程分类!"),
+    COURSE_PIC_IS_EMPTY(false,331105,"课程对应的图片为空,请先上传课程图片!"),
+    COURSE_PIC_IS_HAVE_MULTIPLE_IMAGES(false,331106,"当前课程对应图片存在多个!");
 
     boolean success;
 

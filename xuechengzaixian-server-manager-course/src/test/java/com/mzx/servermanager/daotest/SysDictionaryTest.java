@@ -23,7 +23,7 @@ public class SysDictionaryTest {
     private ISysDictionDao sysDictionDao;
 
     @Test
-    public void t1(){
+    public void t1() {
 
         List<SysDictionary> all = sysDictionDao.findAll();
         System.out.println(all);
@@ -31,7 +31,7 @@ public class SysDictionaryTest {
     }
 
     @Test
-    public void t2(){
+    public void t2() {
 
         Optional<SysDictionary> o = sysDictionDao.findBydName("课程等级");
         if( o.isPresent() ){
@@ -40,6 +40,5 @@ public class SysDictionaryTest {
         }
 
     }
-
 
 }

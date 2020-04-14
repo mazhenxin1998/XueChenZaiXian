@@ -9,6 +9,14 @@
     </select>
 <!-- id name users(适用人群)  grade studyModel(学习模式) description(课程介绍) mt(大分类) st(小分类) -->
     <insert id="add" parameterType="com.mzx.framework.model.course.CourseBase">
-
+        insert into
+        course_base(id,name,users,mt,grade,studymodel,teachmode,description,st,status,company_id,user_id)
+        values(#{courseBase.id},#{courseBase.name},#{courseBase.users},#{courseBase.mt},#{courseBase.grade},
+               #{courseBase.studymodel},#{courseBase.teachmode},#{courseBase.description},#{courseBase.st},
+               #{courseBase.status},#{courseBase.companyId},#{courseBase.userId});
     </insert>
+
+    <delete id="delete" parameterType="string">
+        delete from course_base where id  = #{id};
+    </delete>
 </mapper>

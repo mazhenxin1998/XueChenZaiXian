@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mzx.servermanager.dao.ICourseMarketDao">
+
+
+<!--  startTime  增加-->
+    <insert id="add" parameterType="com.mzx.framework.model.course.CourseMarket">
+        insert into
+        course_market(id,charge,valid,expires,qq,price,price_old,end_time,start_time)
+        values(#{courseMarket.id},#{courseMarket.charge},#{courseMarket.valid},#{courseMarket.expires},#{courseMarket.qq},
+               #{courseMarket.price},#{courseMarket.price_old},#{courseMarket.endTime},#{courseMarket.startTime});
+    </insert>
+
+    <delete id="delete">
+        delete  from course_market where id = #{id};
+    </delete>
+
+    <select id="getByID" resultType="com.mzx.framework.model.course.CourseMarket">
+        select
+        c.id,c.charge,c.valid,c.expires,c.qq,c.price,c.price_old,c.start_time,c.end_time
+        from course_market as c where id = #{id};
+    </select>
+</mapper>

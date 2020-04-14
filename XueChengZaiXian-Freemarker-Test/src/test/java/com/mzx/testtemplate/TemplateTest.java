@@ -10,9 +10,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
+import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.Resource;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +27,9 @@ import java.util.Map;
 @SpringBootTest(classes = {FreemakerApp.class})
 @RunWith(SpringRunner.class)
 public class TemplateTest {
+
+    @Resource
+    private RestTemplate restTemplate;
 
     @Test
     public void testTemplate() throws IOException, TemplateException {
@@ -91,6 +97,17 @@ public class TemplateTest {
         FileOutputStream fileOutputStream = new FileOutputStream(new File("d:/test1.html"));
         IOUtils.copy(inputStream, fileOutputStream);
 
+
+    }
+
+    @Test
+    public String t3(){
+
+        ResponseEntity<Map> entity = restTemplate.getForEntity("http://localhost:31200/course/" +
+                "courseView/4028e581617f945f01617f9dabc40000", Map.class);
+        Map map = entity.getBody();
+
+        return "course";
 
     }
 

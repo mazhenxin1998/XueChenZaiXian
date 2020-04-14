@@ -22,6 +22,7 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import jdk.internal.util.xml.impl.Input;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,7 @@ import java.util.*;
  * @date 2020/2/6 13:11
  */
 @Service
+@Slf4j
 public class PageServiceImpl implements IPageService {
 
     @Autowired
@@ -164,12 +166,39 @@ public class PageServiceImpl implements IPageService {
             }
         }
 
-        cmsPageRepository.save(cmsPage);
+        /*将增加成功之后的CmsPage封装到返回类型中.*/
+        CmsPage save = cmsPageRepository.save(cmsPage);
         QueryResult<CmsPage> queryResult = new QueryResult<CmsPage>();
-        queryResult.setList(null);
-        queryResult.setTotal(0L);
+        queryResult.setData(save);
 
         return new QueryResponseResult(CommonCode.SUCCESS, queryResult);
+    }
+
+
+    @Override
+    public CmsPage addPage(CmsPage page) {
+
+
+        if (ObjectUtils.isEmpty(page)) {
+            ThrowException.exception(CommonCode.BAD_PARAMETERS);
+        }
+
+        // 校验页面是否已经存在
+        Optional<CmsPage> o = cmsPageRepository.findByPageNameAndSiteIdAndPageWebPath(page.getPageName(),
+                page.getSiteId(), page.getPageWebPath());
+        if (o.isPresent()) {
+            CmsPage cmsPage = o.get();
+            if (!ObjectUtils.isEmpty(cmsPage)) {
+                cmsPageRepository.deleteCmsPageByPageNameAndSiteIdAndPageWebPath(page.getPageName(),
+                        page.getSiteId(), page.getPageWebPath());
+                this.addPage(page);
+            }
+        }
+
+        /*将增加成功之后的CmsPage封装到返回类型中.*/
+        CmsPage save = cmsPageRepository.save(page);
+        log.info("增加之后返回的CmsPage信息:  " + save);
+        return save;
     }
 
     @Override
@@ -263,15 +292,15 @@ public class PageServiceImpl implements IPageService {
     @Override
     public ResponseResult publishPage(String pageID) {
 
-        if( StringUtils.isEmpty(pageID) ){
+        if (StringUtils.isEmpty(pageID)) {
             ThrowException.exception(CommonCode.BAD_PARAMETERS);
         }
         CmsPage page = this.getByID(pageID);
-        if( page == null ){
+        if (page == null) {
             ThrowException.exception(CmsCode.CMS_PAGE_NOT_FIND);
         }
         String content = this.getPageHtml(pageID);
-        if( StringUtils.isEmpty(content) ){
+        if (StringUtils.isEmpty(content)) {
             ThrowException.exception(CmsCode.CMS_PAGE_NOT_FIND);
         }
 
@@ -279,20 +308,20 @@ public class PageServiceImpl implements IPageService {
         CmsPage cmsPage = this.saveHtml(pageID, content);
         cmsPageRepository.save(cmsPage);
 
-        Map<String,Object> message = new HashMap<>();
-        message.put("pageID",cmsPage.getId());
-        Map<String,Object> properties = new HashMap<>();
+        Map<String, Object> message = new HashMap<>();
+        message.put("pageID", cmsPage.getId());
+        Map<String, Object> properties = new HashMap<>();
         // 向MQ发送消息
-        messageSender.sendMessage(message,properties);
+        messageSender.sendMessage(message, properties);
 
         return ResponseResult.SUCCESS();
     }
 
     /**
+     * 将该字符串所表示的HTML页面发布到GridFS上
+     * <p>
+     * 存储之前需要先看看pageID对应的html页面是否存在
      *
-     *  将该字符串所表示的HTML页面发布到GridFS上
-     *
-     *  存储之前需要先看看pageID对应的html页面是否存在
      * @param pageID
      * @param htmlContent
      * @return
@@ -301,21 +330,50 @@ public class PageServiceImpl implements IPageService {
     public CmsPage saveHtml(String pageID, String htmlContent) {
 
         CmsPage page = this.getByID(pageID);
-        if( ObjectUtils.isEmpty(page) ){
+        if (ObjectUtils.isEmpty(page)) {
             ThrowException.exception(CmsCode.CMS_PAGE_NOT_FIND);
         }
-        if(!StringUtils.isEmpty(page.getHtmlFileId())){
+        if (!StringUtils.isEmpty(page.getHtmlFileId())) {
             gridFsTemplate.delete(Query.query(Criteria.where("_id").is(page.getHtmlFileId())));
         }
 
         InputStream inputStream = null;
         try {
-            inputStream = IOUtils.toInputStream(htmlContent,"utf-8");
+            inputStream = IOUtils.toInputStream(htmlContent, "utf-8");
         } catch (IOException e) {
             e.printStackTrace();
         }
         ObjectId objectId = gridFsTemplate.store(inputStream, page.getPageName());
         page.setHtmlFileId(objectId.toString());
+
+        return page;
+    }
+
+
+    @Override
+    public CmsPage getByPageNameAndSiteIdAndPageWebPath(String pageName, String siteID, String webPath) {
+
+        if (StringUtils.isEmpty(pageName)) {
+
+            return null;
+        }
+
+        if (StringUtils.isEmpty(siteID)) {
+
+            return null;
+        }
+
+        if (StringUtils.isEmpty(webPath)) {
+
+            return null;
+        }
+
+        Optional<CmsPage> o = cmsPageRepository.findByPageNameAndSiteIdAndPageWebPath(pageName, siteID, webPath);
+        CmsPage page = null;
+        if (o.isPresent()) {
+
+            page = o.get();
+        }
 
         return page;
     }
@@ -370,7 +428,7 @@ public class PageServiceImpl implements IPageService {
         }
 
         String pagehtml = this.generateHtml(model, templateContent);
-        if( StringUtils.isEmpty(pagehtml) ){
+        if (StringUtils.isEmpty(pagehtml)) {
             ThrowException.exception(CmsCode.CMS_GENERATEHTML_HTMLISNULL);
         }
 
@@ -482,7 +540,6 @@ public class PageServiceImpl implements IPageService {
 
         return body;
     }
-
 
 
 }

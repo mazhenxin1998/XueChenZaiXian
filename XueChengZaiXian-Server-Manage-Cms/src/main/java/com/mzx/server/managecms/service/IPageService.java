@@ -103,5 +103,21 @@ public interface IPageService {
      */
     CmsPage saveHtml(String pageID,String htmlContent);
 
+    /**
+     * 查询.
+     * @param pageName
+     * @param siteID
+     * @param webPath
+     * @return
+     */
+    CmsPage getByPageNameAndSiteIdAndPageWebPath(String pageName, String siteID, String webPath);
+
+    /**
+     * 增加CmsPage并且返回.
+     * @param page
+     * @return
+     */
+    CmsPage addPage(CmsPage page);
+
 
 }

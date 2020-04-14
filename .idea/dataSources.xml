@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="xuechengzaixian-login/Hibernate" uuid="3e21adce-d4dd-4e2a-bbce-fbcc9f2df26c">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>Hibernate</remarks>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://192.144.198.148:3306/xc_user?useSSL=false&amp;serverTimezone=GMT&amp;useUnicode=true&amp;characterEncoding=utf-8</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="xuechengzaixian-server-manager-course/Hibernate" uuid="636f5e5d-2cf3-4fdf-84c0-56f7ef081866">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>Hibernate</remarks>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://192.144.198.148:3306/xc_course?useSSL=false&amp;serverTimezone=GMT&amp;useUnicode=true&amp;characterEncoding=utf-8</jdbc-url>
+    </data-source>
+  </component>
+</project>

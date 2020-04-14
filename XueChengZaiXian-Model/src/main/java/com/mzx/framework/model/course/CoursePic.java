@@ -16,8 +16,12 @@ public class CoursePic implements Serializable {
 
     private static final long serialVersionUID = -916357110051689486L;
 
-    @Id
     private String courseid;
+    /**
+     * pic对应的是url
+     */
     private String pic;
+    private String fileName;
+    private String status;
 
 }

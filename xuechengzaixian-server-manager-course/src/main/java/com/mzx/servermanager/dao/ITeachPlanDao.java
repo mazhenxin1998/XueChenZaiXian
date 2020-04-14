@@ -27,6 +27,11 @@ public interface ITeachPlanDao {
 
     TeachPlan getByID(@Param("id") String id);
 
+    /**
+     * 通过课程ID获取到该课程的课程计划也就是目录.
+     * @param id 课程ID.
+     * @return 该课程所需要的课程计划.
+     */
     TeachPlanNode getNode(@Param("id") String id);
 
     List<TeachPlanNode> getTeachPlanNode(@Param("courseID") String courseID);

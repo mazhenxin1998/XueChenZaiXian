@@ -14,6 +14,12 @@
         <module>XueChengZaiXian-Freemarker-Test</module>
         <module>XueChengZaiXian-Server-CmsClient</module>
         <module>xuechengzaixian-server-manager-course</module>
+        <module>xuechengzaixina-fastdfs-test</module>
+        <module>xuechengzaixina-filesystem</module>
+        <module>xuechengzaixian-openfign-test</module>
+        <module>xuechengzaixian-openfeign-test2</module>
+        <module>xuechengzaixina-openfeign-client-test</module>
+        <module>xuechengzaixian-login</module>
     </modules>
 
     <groupId>com.mzx</groupId>

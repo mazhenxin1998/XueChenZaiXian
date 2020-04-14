@@ -15,6 +15,10 @@ public interface ICourseBaseDao {
 
     void add(@Param(value = "courseBase") CourseBase courseBase);
 
+    void delete(String id);
+
+
+
 
 
 }

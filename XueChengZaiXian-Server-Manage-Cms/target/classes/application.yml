@@ -1,6 +1,5 @@
 server:
   port: 31001
-
 spring:
   application:
     name: xuechengzaixian-server-manager-cms
@@ -49,3 +48,7 @@ xuecheng:
     # 路由Key为门户站点ID
     routingkey: 5a751fab6abb5044e0d19ea1
     exchangename: ex_routing_cms_postpage
+feign:
+  hystrix:
+    enabled: true
+

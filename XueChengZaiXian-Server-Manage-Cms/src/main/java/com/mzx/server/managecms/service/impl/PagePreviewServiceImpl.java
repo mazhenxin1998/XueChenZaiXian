@@ -11,8 +11,6 @@ import com.mzx.framework.model.cms.response.CmsCode;
 import com.mzx.server.managecms.dao.CmsTemplateRepository;
 import com.mzx.server.managecms.service.IPagePreviewService;
 import com.mzx.server.managecms.service.IPageService;
-import com.mzx.server.managecms.service.ITemplateService;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import freemarker.cache.StringTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -25,10 +23,8 @@ import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
-import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
-import sun.security.krb5.Config;
 
 import java.io.IOException;
 import java.util.Map;
@@ -46,7 +42,7 @@ public class PagePreviewServiceImpl implements IPagePreviewService {
 
     @Autowired
     private RestTemplate template;
-    
+
     @Autowired
     private CmsTemplateRepository templateRepository;
 
@@ -55,145 +51,166 @@ public class PagePreviewServiceImpl implements IPagePreviewService {
 
     @Autowired
     private GridFSBucket gridFSBucket;
-    
-    
+
 
     @Override
     public String preview(String pageID) {
 
         String content = "";
-        if( StringUtils.isEmpty(pageID)){
+        if (StringUtils.isEmpty(pageID)) {
+
             ThrowException.exception(CommonCode.BAD_PARAMETERS);
-        }else{
+        } else {
+
             String s = this.generateHtml(pageID);
-            if( StringUtils.isEmpty(s) ){
+            if (StringUtils.isEmpty(s)) {
+
                 ThrowException.exception(CmsCode.CMS_NOT_FIND_TEMPLATE_FILE);
-            }else{
+            } else {
+
                 content = s;
             }
 
         }
+
         return content;
     }
 
-    /**
-     *  静态化
-     */
     @Override
-    public String generateHtml(String pageID){
+    public synchronized String generateHtml(String pageID) {
+
         //   获取数据模型
-        Map map = this.getMap(pageID);
-        if( map == null ){
-            ThrowException.exception(CmsCode.CMS_GENERATEHTML_DATAURLISNULL);
+        Map map = this.getMapBody(pageID);
+        if (map == null) {
+
+            //ThrowException.exception(CmsCode.CMS_GENERATEHTML_DATAURLISNULL);
         }
+
         // 获取模板字符串 从GridFS中获取模板文件 并转换为字符串
         String content = this.content(pageID);
-        if( StringUtils.isEmpty(content) ){
+        if (StringUtils.isEmpty(content)) {
+
             ThrowException.exception(CmsCode.CMS_GENERATEHTML_TEMPLATEISNULL);
         }
 
         // 静态化
         Configuration configuration = new Configuration(Configuration.getVersion());
         StringTemplateLoader loader = new StringTemplateLoader();
-        loader.putTemplate("template",content);
+        loader.putTemplate("template", content);
         configuration.setTemplateLoader(loader);
 
         try {
+
             Template template = configuration.getTemplate("template");
             String fileContent = FreeMarkerTemplateUtils.processTemplateIntoString(template, map);
-            if( StringUtils.isEmpty(fileContent) ){
+            if (StringUtils.isEmpty(fileContent)) {
+
                 ThrowException.exception(CmsCode.CMS_GENERATEHTML_TEMPLATEISNULL);
-            }else{
+            } else {
+
                 return fileContent;
             }
         } catch (Exception e) {
+
             e.printStackTrace();
         }
 
         return null;
     }
 
-    /**
-     * 获取模板字符串
-     */
-    public String content(String pageID){
+    @Override
+    public String content(String pageID) {
 
         String fileID = this.getFileID(pageID);
-        if( StringUtils.isEmpty(fileID)){
+        if (StringUtils.isEmpty(fileID)) {
+
             ThrowException.exception(CmsCode.CMS_NOT_FIND_TEMPLATE_FILE);
         }
 
         GridFSFile file = gridFsTemplate.findOne(Query.query(Criteria.where("_id").is(fileID)));
-        if( file == null) {
+        if (file == null) {
+
             ThrowException.exception(CmsCode.CMS_NOT_FIND_TEMPLATE_FILE);
         }
-        GridFSDownloadStream downloadStream = gridFSBucket.openDownloadStream(file.getObjectId());
-        GridFsResource resource = new GridFsResource(file,downloadStream);
 
+        GridFSDownloadStream downloadStream = gridFSBucket.openDownloadStream(file.getObjectId());
+        GridFsResource resource = new GridFsResource(file, downloadStream);
         // 将流转换为字符串
         try {
+
             String content = IOUtils.toString(resource.getInputStream(), "utf-8");
-            if( StringUtils.isEmpty(content)){
+            if (StringUtils.isEmpty(content)) {
+
                 ThrowException.exception(CmsCode.CMS_NOT_FIND_TEMPLATE_FILE);
-            }else{
+            } else {
+
                 return content;
             }
+
         } catch (IOException e) {
+
             e.printStackTrace();
         }
 
         return null;
     }
 
-    
-    /**
-     * 根据页面ID获取页面静态模板
-     */
-    public String getFileID(String pageID){
+    @Override
+    public String getFileID(String pageID) {
 
         CmsPage cmsPage = pageService.getByID(pageID);
-        if( cmsPage == null ){
+        if (cmsPage == null) {
+
             ThrowException.exception(CmsCode.CMS_PAGE_NOT_FIND);
         }
+
         String templateId = cmsPage.getTemplateId();
-        if( StringUtils.isEmpty(templateId)){
+        if (StringUtils.isEmpty(templateId)) {
+
             ThrowException.exception(CmsCode.CMS_NOT_FIND_TEMPLATE_FILE);
         }
 
         Optional<CmsTemplate> o = templateRepository.findById(templateId);
         String fileID = null;
-        if( o.isPresent() ){
+        if (o.isPresent()) {
+
             CmsTemplate template = o.get();
             fileID = template.getTemplateFileId();
-            if( StringUtils.isEmpty(fileID)){
+            if (StringUtils.isEmpty(fileID)) {
+
                 ThrowException.exception(CmsCode.CMS_NOT_FIND_TEMPLATE_FILE);
-            }else{
-                return  fileID;
+            } else {
+
+                return fileID;
             }
+
         }
 
         return null;
     }
 
-    /**
-     *  根据页面ID获取数据模型
-     */
-    public Map getMap(String pageID){
+    @Override
+    public Map getMapBody(String pageID) {
 
         CmsPage cmsPage = pageService.getByID(pageID);
-        if(ObjectUtils.isEmpty(cmsPage)) {
-            ThrowException.exception(CmsCode.CMS_PAGE_NOT_FIND);
-        }
-        String dataUrl = cmsPage.getDataUrl();
-        if (StringUtils.isEmpty(dataUrl)) {
-            ThrowException.exception(CmsCode.CMS_GENERATEHTML_DATAURLISNULL);
+        if ( cmsPage == null ) {
+
+            return null;
+        }else{
+
+            /*可能为空 dataUrl*/
+            String dataUrl = cmsPage.getDataUrl();
+            if (StringUtils.isEmpty(dataUrl)) {
+
+                ThrowException.exception(CmsCode.CMS_GENERATEHTML_DATAURLISNULL);
+            }
+
+            ResponseEntity<Map> entity = template.getForEntity(dataUrl, Map.class);
+            /* entity的数据结构.teachplanNode.children */
+            Map body = entity.getBody();
+            return body;
         }
 
-        ResponseEntity<Map> entity = template.getForEntity(dataUrl, Map.class);
-        Map body = entity.getBody();
-
-        return body;
     }
-
 
 }
