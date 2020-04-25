@@ -10,13 +10,17 @@ import com.mzx.common.model.response.QueryResponseResult;
 import com.mzx.common.model.response.QueryResult;
 import com.mzx.common.model.response.ResponseResult;
 import com.mzx.framework.model.cms.CmsPage;
+import com.mzx.framework.model.cms.CmsSite;
 import com.mzx.framework.model.cms.CmsTemplate;
 import com.mzx.framework.model.cms.requesed.QueryPageRequest;
 import com.mzx.framework.model.cms.response.CmsCode;
+import com.mzx.framework.model.cms.response.CmsPageResult;
+import com.mzx.framework.model.course.response.CmsPostPageResult;
 import com.mzx.server.managecms.dao.CmsPageRepository;
 import com.mzx.server.managecms.dao.CmsTemplateRepository;
 import com.mzx.server.managecms.mqproducer.IMessageProduceSender;
 import com.mzx.server.managecms.service.IPageService;
+import com.mzx.server.managecms.service.ISiteService;
 import freemarker.cache.StringTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -41,9 +45,12 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 import sun.security.krb5.Config;
 
+import javax.annotation.Resource;
+import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 /**
@@ -71,6 +78,9 @@ public class PageServiceImpl implements IPageService {
 
     @Autowired
     private GridFSBucket gridFSBucket;
+
+    @Resource
+    private ISiteService siteService;
 
     @Override
     public QueryResponseResult get(QueryPageRequest request) {
@@ -178,27 +188,52 @@ public class PageServiceImpl implements IPageService {
     @Override
     public CmsPage addPage(CmsPage page) {
 
-
-        if (ObjectUtils.isEmpty(page)) {
-            ThrowException.exception(CommonCode.BAD_PARAMETERS);
-        }
-
         // 校验页面是否已经存在
         Optional<CmsPage> o = cmsPageRepository.findByPageNameAndSiteIdAndPageWebPath(page.getPageName(),
                 page.getSiteId(), page.getPageWebPath());
         if (o.isPresent()) {
+
             CmsPage cmsPage = o.get();
             if (!ObjectUtils.isEmpty(cmsPage)) {
+
                 cmsPageRepository.deleteCmsPageByPageNameAndSiteIdAndPageWebPath(page.getPageName(),
                         page.getSiteId(), page.getPageWebPath());
                 this.addPage(page);
             }
+
         }
 
         /*将增加成功之后的CmsPage封装到返回类型中.*/
         CmsPage save = cmsPageRepository.save(page);
         log.info("增加之后返回的CmsPage信息:  " + save);
         return save;
+    }
+
+    @Override
+    public CmsPostPageResult postPageQuick(CmsPage cmsPage) {
+
+        /*页面一键发布的接口的具体实现
+         * 该页面没有增加成功.*/
+        log.info("课程发布页面的ID        " + cmsPage.getId());
+//        CmsPage addPage = this.addPage(cmsPage);
+        CmsPage addPage = this.addPublishPage(cmsPage);
+        log.info("课程页面年增加成功.");
+        /*要发布的页面ID*/
+        String pageId = addPage.getId();
+        /*页面发布.*/
+        ResponseResult responseResult = this.publishPage(pageId);
+        /*页面的URL=站点物理地址+页面的访问路径+页面的名称*/
+        CmsSite cmsSite = siteService.getByID(addPage.getSiteId());
+        /*顺序一定不能写反*/
+        log.info("站点域名:    " + cmsSite.getSiteDomain());
+        log.info("站点的Web路径:   "+cmsSite.getSiteWebPath());
+        log.info("页面的访问路径:    "+addPage.getPageWebPath());
+        log.info("发布页面的名字：    "+addPage.getPageName());
+        String url = this.appendString(cmsSite.getSiteDomain(), cmsSite.getSiteWebPath(),
+                addPage.getPageWebPath(),
+                addPage.getPageName());
+        log.info("发布成功之后页面的URL为：      " + url);
+        return new CmsPostPageResult(CommonCode.SUCCESS, url);
     }
 
     @Override
@@ -291,29 +326,36 @@ public class PageServiceImpl implements IPageService {
 
     @Override
     public ResponseResult publishPage(String pageID) {
-
+        log.info("页面发布方法 publishPage 执行了  参数pageID:     " + pageID);
         if (StringUtils.isEmpty(pageID)) {
+
             ThrowException.exception(CommonCode.BAD_PARAMETERS);
         }
+
         CmsPage page = this.getByID(pageID);
+        log.info(" 通过参数pageID查出来的CmsPage:     " + page);
         if (page == null) {
+
             ThrowException.exception(CmsCode.CMS_PAGE_NOT_FIND);
         }
+
         String content = this.getPageHtml(pageID);
         if (StringUtils.isEmpty(content)) {
+
             ThrowException.exception(CmsCode.CMS_PAGE_NOT_FIND);
         }
 
-        // 将静态文件保存到GridFS上  并将保存后返回的HTML 作为值修改page的htmlFileID
+        /*将静态文件保存到GridFS上  并将保存后返回的HTML 作为值修改page的htmlFileID*/
         CmsPage cmsPage = this.saveHtml(pageID, content);
         cmsPageRepository.save(cmsPage);
-
         Map<String, Object> message = new HashMap<>();
+        log.info("向MQ发送的消息为 pageID  ：   " + cmsPage.getId());
         message.put("pageID", cmsPage.getId());
+        /*该Map不用考虑到高并发的情况.*/
         Map<String, Object> properties = new HashMap<>();
         // 向MQ发送消息
         messageSender.sendMessage(message, properties);
-
+        log.info("页面发布方法 publishPage 执行完毕  参数pageID:     " + pageID);
         return ResponseResult.SUCCESS();
     }
 
@@ -541,5 +583,33 @@ public class PageServiceImpl implements IPageService {
         return body;
     }
 
+    @Override
+    public String appendString(String... args) {
+
+        StringBuilder builder = new StringBuilder();
+        for (String arg : args) {
+
+            builder.append(arg);
+        }
+
+        return builder.toString();
+    }
+
+    public CmsPage addPublishPage(CmsPage cmsPage) {
+
+        log.info("向MongoDB CmsPage数据库中插入一个文档记录");
+        log.info("插入数据的信息        " + cmsPage);
+        if (cmsPage.getId() != null) {
+
+            /* 如果CmsPage ID 不为空 那么就说明数据库中已经存在了需要删除*/
+            cmsPageRepository.deleteById(cmsPage.getId());
+            cmsPage.setId(null);
+            this.addPublishPage(cmsPage);
+        }
+
+        CmsPage save = cmsPageRepository.save(cmsPage);
+        log.info("向MongoDB CmsPage 数据库插入文档成功" + save);
+        return save;
+    }
 
 }

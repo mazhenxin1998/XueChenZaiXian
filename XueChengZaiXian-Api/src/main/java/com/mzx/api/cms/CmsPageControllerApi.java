@@ -6,6 +6,7 @@ import com.mzx.common.model.response.ResponseResult;
 import com.mzx.framework.model.cms.CmsPage;
 import com.mzx.framework.model.cms.requesed.AddPageRequest;
 import com.mzx.framework.model.cms.requesed.QueryPageRequest;
+import com.mzx.framework.model.course.response.CmsPostPageResult;
 import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -55,6 +56,16 @@ public interface CmsPageControllerApi {
 
     @ApiOperation(value = "增加一个CmsPage并且返回")
     CmsPage addCmsPage(CmsPage page);
+
+    /**
+     * 一键发布页面的接口.
+     *
+     * 传进来的参数必须是一个完整的页面类型,不需要自己再去设置各个属性的CmsPage.
+     * @param cmsPage
+     * @return
+     */
+    @ApiOperation(value = "页面一键发布接口")
+    CmsPostPageResult postPageQuick(CmsPage cmsPage);
 
 
 

@@ -37,6 +37,8 @@ spring:
     nacos:
       discovery:
         server-addr: 192.144.198.148:8848
+  aop:
+    auto: true
 management:
   endpoints:
     web:

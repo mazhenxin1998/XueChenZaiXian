@@ -2,6 +2,7 @@ package com.mzx.servermanager.feign;
 
 import com.mzx.common.model.response.QueryResponseResult;
 import com.mzx.framework.model.cms.CmsPage;
+import com.mzx.framework.model.course.response.CmsPostPageResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
@@ -64,5 +65,9 @@ public interface CmsPagePreviewServiceOpenFeign {
 
     @PostMapping(value = "/page/post/add/page")
     CmsPage addPage(@RequestBody CmsPage cmsPage);
+
+    @PostMapping(value = "/page/quick/postPage")
+    CmsPostPageResult postPageQuick(@RequestBody CmsPage cmsPage);
+
 
 }

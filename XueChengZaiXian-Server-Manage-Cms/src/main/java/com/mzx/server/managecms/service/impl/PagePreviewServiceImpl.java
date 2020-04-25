@@ -14,6 +14,7 @@ import com.mzx.server.managecms.service.IPageService;
 import freemarker.cache.StringTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -25,6 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
+import sun.rmi.runtime.Log;
 
 import java.io.IOException;
 import java.util.Map;
@@ -35,6 +37,7 @@ import java.util.Optional;
  * @date 2020/2/15 13:14
  */
 @Service
+@Slf4j
 public class PagePreviewServiceImpl implements IPagePreviewService {
 
     @Autowired
@@ -55,7 +58,7 @@ public class PagePreviewServiceImpl implements IPagePreviewService {
 
     @Override
     public String preview(String pageID) {
-
+        log.info("页面预览传进来的页面ID:   "+pageID);
         String content = "";
         if (StringUtils.isEmpty(pageID)) {
 

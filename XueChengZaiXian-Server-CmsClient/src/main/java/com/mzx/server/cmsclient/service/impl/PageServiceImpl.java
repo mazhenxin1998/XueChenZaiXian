@@ -34,80 +34,97 @@ public class PageServiceImpl implements IPageService {
 
     @Autowired
     private GridFsTemplate gridFsTemplate;
-    
+
     @Autowired
     private GridFSBucket gridFSBucket;
-    
+
     @Autowired
     private CmsPageRepository pageRepository;
-    
+
     @Autowired
     private CmsSiteRepository siteRepository;
 
     @Override
     public void savePageToServerPath(String pageID) {
-        
-        if(StringUtils.isEmpty(pageID)){
+
+        if (StringUtils.isEmpty(pageID)) {
+
             ThrowException.exception(CommonCode.BAD_PARAMETERS);
         }
+
         Optional<CmsPage> optional = pageRepository.findById(pageID);
         String htmlFileID = "";
         String siteID = "";
-        if( !optional.isPresent() ){
+        if (!optional.isPresent()) {
+
+            /*报错.*/
             ThrowException.exception(CmsCode.CMS_PAGE_NOT_FIND);
         }
+
         CmsPage cmsPage = optional.get();
         htmlFileID = cmsPage.getHtmlFileId();
         siteID = cmsPage.getSiteId();
         CmsSite cmsSite = this.findSiteBySiteID(siteID);
-        String path = cmsSite.getSitePhysicalPath()+cmsPage.getPageWebPath();
-
+        /*页面保存地址为站点的物理地址+页面的访问路径(教程上是页面的物理地址.)*/
+        String path = cmsSite.getSitePhysicalPath() + cmsPage.getPageWebPath()+cmsPage.getPageName();
         // 查询页面静态文件
         InputStream inputStream = this.findFileByFileID(htmlFileID);
-        if( inputStream == null ){
+        if (inputStream == null) {
+
             ThrowException.exception(CmsCode.CMS_NOT_FIND_TEMPLATE_FILE);
         }
+
         File file = new File(path);
-        if( !file.exists()){
+        if (!file.exists()) {
+
             try {
+
                 file.createNewFile();
             } catch (IOException e) {
+
                 e.printStackTrace();
             }
+
         }
+
         try {
+
             //   保存
             FileOutputStream outputStream = new FileOutputStream(file);
-            IOUtils.copy(inputStream,outputStream);
+            IOUtils.copy(inputStream, outputStream);
         } catch (Exception e) {
+
             e.printStackTrace();
         }
 
     }
 
-    public CmsSite findSiteBySiteID(String siteID){
-        if( StringUtils.isEmpty(siteID) ){
+    public CmsSite findSiteBySiteID(String siteID) {
+        if (StringUtils.isEmpty(siteID)) {
             ThrowException.exception(CommonCode.BAD_PARAMETERS);
         }
         Optional<CmsSite> optional = siteRepository.findById(siteID);
-        if( !optional.isPresent() ){
+        if (!optional.isPresent()) {
             ThrowException.exception(CmsCode.CMS_SITE_NOT_FIND);
         }
         return optional.get();
     }
 
-    public InputStream findFileByFileID(String fileID){
+    public InputStream findFileByFileID(String fileID) {
 
-        if( StringUtils.isEmpty(fileID) ){
+        if (StringUtils.isEmpty(fileID)) {
+
             ThrowException.exception(CommonCode.BAD_PARAMETERS);
         }
+
         GridFSFile file = gridFsTemplate.findOne(Query.query(Criteria.where("_id").is(fileID)));
         GridFSDownloadStream downloadStream = gridFSBucket.openDownloadStream(file.getObjectId());
-        GridFsResource resource = new GridFsResource(file,downloadStream);
-
+        GridFsResource resource = new GridFsResource(file, downloadStream);
         try {
+
             return resource.getInputStream();
         } catch (IOException e) {
+
             e.printStackTrace();
         }
 

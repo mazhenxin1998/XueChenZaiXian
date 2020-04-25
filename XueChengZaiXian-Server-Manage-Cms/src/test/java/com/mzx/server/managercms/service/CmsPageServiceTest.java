@@ -52,4 +52,19 @@ public class CmsPageServiceTest {
         }
         System.out.println(2);
     }
+
+    @Test
+    public void test1(){
+        /*统一后面不加前面加*/
+        String s1 = "D://Server";
+        String s2 = "/course";
+        String s3 = "/pageName";
+        String appendString = service.appendString(s1, s2, s3);
+        System.out.println(appendString);
+        String s = service.appendString();
+        System.out.println(1);
+
+
+    }
+
 }

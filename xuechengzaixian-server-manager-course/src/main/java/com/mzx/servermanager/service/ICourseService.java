@@ -5,6 +5,7 @@ import com.mzx.common.model.response.QueryResponseResult;
 import com.mzx.common.model.response.ResponseResult;
 import com.mzx.framework.model.course.CourseBase;
 import com.mzx.framework.model.course.CourseView;
+import com.mzx.framework.model.course.response.CmsPostPageResult;
 import com.mzx.framework.model.course.response.CoursePublishResult;
 
 /**
@@ -15,8 +16,9 @@ public interface ICourseService {
 
     /**
      * 分页查询后台管理中心我的课程列表页面.
-     *
+     * <p>
      * 具体的课程列表从course_base查询,课程图片从course_pics查询,采用一一配对方式.
+     *
      * @param page
      * @param size
      * @return
@@ -80,6 +82,26 @@ public interface ICourseService {
     CoursePublishResult preview(String id);
 
     Integer count();
+
+    CoursePublishResult publish(String courseID);
+
+    /**
+     * 更新课程发布状态.
+     *
+     * @param courseBase
+     * @return
+     */
+    CourseBase updateCourseStatus(CourseBase courseBase);
+
+    /**
+     * 课程发布正式页面的具体实现.
+     *
+     * @param courseID
+     * @return
+     */
+    CmsPostPageResult publishPageOfficial(String courseID);
+
+    String appendString(String... args);
 
 
 }

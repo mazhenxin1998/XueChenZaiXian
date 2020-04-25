@@ -13,4 +13,12 @@ public interface ISiteService {
 
     QueryResponseResult get();
 
+    /**
+     * 通过站点ID从MongoDB中获取到该站点的信息.
+     *
+     * @param siteID
+     * @return
+     */
+    CmsSite getByID(String siteID);
+
 }

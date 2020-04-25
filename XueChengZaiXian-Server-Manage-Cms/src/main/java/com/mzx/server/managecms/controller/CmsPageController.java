@@ -9,6 +9,7 @@ import com.mzx.framework.model.cms.CmsPage;
 import com.mzx.framework.model.cms.Student;
 import com.mzx.framework.model.cms.requesed.AddPageRequest;
 import com.mzx.framework.model.cms.requesed.QueryPageRequest;
+import com.mzx.framework.model.course.response.CmsPostPageResult;
 import com.mzx.server.managecms.dao.CmsPageRepository;
 import com.mzx.server.managecms.dao.StudentRepository;
 import com.mzx.server.managecms.service.IPagePreviewService;
@@ -102,6 +103,13 @@ public class CmsPageController implements CmsPageControllerApi {
     public CmsPage addCmsPage(@RequestBody CmsPage page) {
         /*如果发现已经存在了那么就删除已经存在的,然后再添加.*/
         return pageService.addPage(page);
+    }
+
+    @Override
+    @PostMapping(value = "/quick/postPage")
+    public CmsPostPageResult postPageQuick(@RequestBody CmsPage cmsPage) {
+        /*   /cms/page/quick/postPage*/
+        return pageService.postPageQuick(cmsPage);
     }
 
 

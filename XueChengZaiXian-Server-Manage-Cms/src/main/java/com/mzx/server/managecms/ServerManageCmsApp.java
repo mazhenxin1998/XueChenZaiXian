@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 
 /**
@@ -15,6 +16,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @EntityScan(value = "com.mzx.framework.model.cms")
 @EnableDiscoveryClient
+@EnableAspectJAutoProxy
 @ComponentScan(basePackages = {"com.mzx.api"})
 @ComponentScan(basePackages = {"com.mzx.common"})
 @ComponentScan(basePackages = {"com.mzx.server.managecms"})

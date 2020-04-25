@@ -17,6 +17,7 @@
       <module fileurl="file://$PROJECT_DIR$/xuechengzaixina-fastdfs-test/xuechengzaixina-fastdfs-test.iml" filepath="$PROJECT_DIR$/xuechengzaixina-fastdfs-test/xuechengzaixina-fastdfs-test.iml" />
       <module fileurl="file://$PROJECT_DIR$/xuechengzaixina-filesystem/xuechengzaixina-filesystem.iml" filepath="$PROJECT_DIR$/xuechengzaixina-filesystem/xuechengzaixina-filesystem.iml" />
       <module fileurl="file://$PROJECT_DIR$/xuechengzaixina-openfeign-client-test/xuechengzaixina-openfeign-client-test.iml" filepath="$PROJECT_DIR$/xuechengzaixina-openfeign-client-test/xuechengzaixina-openfeign-client-test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xuechengzaixina-server-search-es/xuechengzaixina-server-search-es.iml" filepath="$PROJECT_DIR$/xuechengzaixina-server-search-es/xuechengzaixina-server-search-es.iml" />
     </modules>
   </component>
 </project>

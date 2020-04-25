@@ -48,10 +48,14 @@ public class ConsumerPostPage implements IConsumerPostPage {
         log.info("---------------     MQ接收到的消息为            Message : "+pageID);
         Long o = (Long) headers.get(AmqpHeaders.DELIVERY_TAG);
         try {
+
             // 当消息处理完毕则签收
             channel.basicAck(o,false);
         } catch (IOException e) {
+
             e.printStackTrace();
         }
+
     }
+
 }

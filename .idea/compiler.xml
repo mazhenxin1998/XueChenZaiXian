@@ -20,6 +20,7 @@
         <module name="XueChengZaiXian-Common" />
         <module name="XueChengZaiXian-Model" />
         <module name="XueChengZaiXian-Freemarker-Test" />
+        <module name="xuechengzaixina-server-search-es" />
         <module name="xuechengzaixina-filesystem" />
       </profile>
     </annotationProcessing>
@@ -39,6 +40,7 @@
       <module name="xuechengzaixina-fastdfs-test" target="1.8" />
       <module name="xuechengzaixina-filesystem" target="1.8" />
       <module name="xuechengzaixina-openfeign-client-test" target="1.8" />
+      <module name="xuechengzaixina-server-search-es" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

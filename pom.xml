@@ -20,6 +20,7 @@
         <module>xuechengzaixian-openfeign-test2</module>
         <module>xuechengzaixina-openfeign-client-test</module>
         <module>xuechengzaixian-login</module>
+        <module>xuechengzaixina-server-search-es</module>
     </modules>
 
     <groupId>com.mzx</groupId>

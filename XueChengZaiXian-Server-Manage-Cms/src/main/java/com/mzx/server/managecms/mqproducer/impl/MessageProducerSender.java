@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.mzx.server.managecms.callback.ConfirmCallback;
 import com.mzx.server.managecms.callback.ReturnCallback;
 import com.mzx.server.managecms.mqproducer.IMessageProduceSender;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import java.util.UUID;
  * @date 2020/3/2 16:50
  */
 @Component
+@Slf4j
 public class MessageProducerSender implements IMessageProduceSender {
 
     @Autowired
@@ -45,12 +47,14 @@ public class MessageProducerSender implements IMessageProduceSender {
     @Override
     public void sendMessage(Map<String,Object> message , Map<String,Object> properties){
 
+        log.info("MQ开始发送消息前");
         template.setReturnCallback(returnCallback);
         template.setConfirmCallback(confirmCallback);
         String uuid = UUID.randomUUID().toString();
         CorrelationData data = new CorrelationData(uuid);
         String string = JSON.toJSONString(message);
         template.convertAndSend(exchange,routingKey,string,data);
+        log.info("MQ发送消息结束");
 
     }
 

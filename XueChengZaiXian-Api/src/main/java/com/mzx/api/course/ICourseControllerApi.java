@@ -22,10 +22,11 @@ public interface ICourseControllerApi {
 
     /**
      * 分页查询出当前用户(老师或者用户)对用的课程.
+     *
      * @return
      */
     @ApiOperation(value = "分页查询")
-    QueryResponseResult get(int page,int size);
+    QueryResponseResult get(int page, int size);
 
     @ApiOperation(value = "增加我的课程")
     ResponseResult add(CourseBase courseBase);
@@ -47,9 +48,10 @@ public interface ICourseControllerApi {
 
     /**
      * 根据页面id进行预览.
-     *
+     * <p>
      * 首先需要根据课程ID获取到该课程ID所对应的静态页面所需要的数据,再利用freemaker静态化技术进行将数据静态化.
      * 这里和CmsPage页面预览类似.
+     *
      * @param id
      * @return
      */
@@ -58,11 +60,21 @@ public interface ICourseControllerApi {
 
     /**
      * 课程预览的接口,返回的是该课程页面的URL地址,并将其封装在CoursePublishResult中.
+     *
      * @param id 课程ID.
-     * @return 页面预览后打的结果,其中页面URL被封装在return中.
+     * @return 页面预览后打的结果, 其中页面URL被封装在return中.
      */
     @ApiOperation(value = "课程预览接口")
     CoursePublishResult coursePreview(String id);
+
+    /**
+     * 课程发布接口.
+     *
+     * @param cmsPageID
+     * @return
+     */
+    @ApiOperation(value = "课程发布接口")
+    CoursePublishResult publish(String cmsPageID);
 
 
 }

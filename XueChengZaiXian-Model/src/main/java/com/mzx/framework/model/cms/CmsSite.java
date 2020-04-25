@@ -30,7 +30,7 @@ public class CmsSite {
     @ApiModelProperty(value = "站点名称")
     private String siteName;
 
-    @ApiModelProperty( value = "站点路径" )
+    @ApiModelProperty( value = "站点域名" )
     private String siteDomain;
 
     @ApiModelProperty( value = "站点端口")
