@@ -14,10 +14,10 @@
       <module fileurl="file://$PROJECT_DIR$/xuechengzaixian-openfeign-test2/xuechengzaixian-openfeign-test2.iml" filepath="$PROJECT_DIR$/xuechengzaixian-openfeign-test2/xuechengzaixian-openfeign-test2.iml" />
       <module fileurl="file://$PROJECT_DIR$/xuechengzaixian-openfign-test/xuechengzaixian-openfign-test.iml" filepath="$PROJECT_DIR$/xuechengzaixian-openfign-test/xuechengzaixian-openfign-test.iml" />
       <module fileurl="file://$PROJECT_DIR$/xuechengzaixian-server-manager-course/xuechengzaixian-server-manager-course.iml" filepath="$PROJECT_DIR$/xuechengzaixian-server-manager-course/xuechengzaixian-server-manager-course.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xuechengzaixian-server-search-es/xuechengzaixian-server-search-es.iml" filepath="$PROJECT_DIR$/xuechengzaixian-server-search-es/xuechengzaixian-server-search-es.iml" />
       <module fileurl="file://$PROJECT_DIR$/xuechengzaixina-fastdfs-test/xuechengzaixina-fastdfs-test.iml" filepath="$PROJECT_DIR$/xuechengzaixina-fastdfs-test/xuechengzaixina-fastdfs-test.iml" />
       <module fileurl="file://$PROJECT_DIR$/xuechengzaixina-filesystem/xuechengzaixina-filesystem.iml" filepath="$PROJECT_DIR$/xuechengzaixina-filesystem/xuechengzaixina-filesystem.iml" />
       <module fileurl="file://$PROJECT_DIR$/xuechengzaixina-openfeign-client-test/xuechengzaixina-openfeign-client-test.iml" filepath="$PROJECT_DIR$/xuechengzaixina-openfeign-client-test/xuechengzaixina-openfeign-client-test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/xuechengzaixina-server-search-es/xuechengzaixina-server-search-es.iml" filepath="$PROJECT_DIR$/xuechengzaixina-server-search-es/xuechengzaixina-server-search-es.iml" />
     </modules>
   </component>
 </project>
