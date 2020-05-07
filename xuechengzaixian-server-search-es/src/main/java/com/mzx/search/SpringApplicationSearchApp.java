@@ -11,8 +11,11 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-public class SpringApplicationSearchApp {
-    public static void main(String[] args) {
+public class SpringApplicationSearchApp
+{
+    public static void main(String[] args)
+    {
         SpringApplication.run(SpringApplicationSearchApp.class,args);
     }
+
 }

@@ -16,17 +16,17 @@ import java.io.Serializable;
  */
 @Configuration
 @Component
-public class ElasticSearchConfig implements Serializable {
-
+public class ElasticSearchConfig implements Serializable
+{
 
     @Bean
-    public RestHighLevelClient restHighLevelClient(){
+    public RestHighLevelClient restHighLevelClient()
+    {
 
         RestHighLevelClient client = new RestHighLevelClient(RestClient.builder(new HttpHost("127.0.0.1",
                 9200, "http")));
 
         return client;
-
     }
 
 

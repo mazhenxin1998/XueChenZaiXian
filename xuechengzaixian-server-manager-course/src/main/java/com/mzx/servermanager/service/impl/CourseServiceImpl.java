@@ -1,16 +1,14 @@
 package com.mzx.servermanager.service.impl;
 
 
+import com.alibaba.fastjson.JSON;
 import com.mzx.common.model.request.RequestData;
 import com.mzx.common.model.response.CommonCode;
 import com.mzx.common.model.response.QueryResponseResult;
 import com.mzx.common.model.response.QueryResult;
 import com.mzx.common.model.response.ResponseResult;
 import com.mzx.framework.model.cms.CmsPage;
-import com.mzx.framework.model.course.CourseBase;
-import com.mzx.framework.model.course.CourseMarket;
-import com.mzx.framework.model.course.CoursePic;
-import com.mzx.framework.model.course.CourseView;
+import com.mzx.framework.model.course.*;
 import com.mzx.framework.model.course.ext.CourseInfo;
 import com.mzx.framework.model.course.ext.TeachPlanNode;
 import com.mzx.framework.model.course.response.CmsPostPageResult;
@@ -18,6 +16,7 @@ import com.mzx.framework.model.course.response.CourseCode;
 import com.mzx.framework.model.course.response.CoursePublishResult;
 import com.mzx.servermanager.dao.*;
 import com.mzx.servermanager.feign.CmsPagePreviewServiceOpenFeign;
+import com.mzx.servermanager.feign.IElasticSearchServerClient;
 import com.mzx.servermanager.service.ICourseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,6 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 
@@ -53,6 +53,9 @@ public class CourseServiceImpl implements ICourseService {
 
     @Resource
     private ITeachPlanDao teachPlanDao;
+
+    @Resource
+    private IElasticSearchServerClient iElasticSearchServerClient;
 
     @Value("${xuechengzaixian.course.publish.dataUrlPre}")
     private String publish_dataUrlPre;
@@ -337,7 +340,12 @@ public class CourseServiceImpl implements ICourseService {
         CourseBase cb = this.updateCourseStatus(courseBase);
         /*页面URL*/
         String pageUrl = cmsPostPageResult.getPageUrl();
-        return new CoursePublishResult(CommonCode.SUCCESS,pageUrl);
+
+        /*调用ES服务向ES中添加发布成功的索引.*/
+        CoursePub coursePub = this.constructCoursePub(courseBase);
+        iElasticSearchServerClient.addIndex(coursePub);
+
+        return new CoursePublishResult(CommonCode.SUCCESS, pageUrl);
     }
 
     @Override
@@ -370,10 +378,10 @@ public class CourseServiceImpl implements ICourseService {
         /*页面存储路径*/
         cmsPage.setPagePhysicalPath(publish_page_physicalpath);
         /*数据URL*/
-        cmsPage.setDataUrl(this.appendString(publish_dataUrlPre,courseID));
+        cmsPage.setDataUrl(this.appendString(publish_dataUrlPre, courseID));
 
         /*页面调用远程服务进行页面发布
-        * 该CmsPage是没有ID的*/
+         * 该CmsPage是没有ID的*/
         CmsPostPageResult postPageResult = cmsClient.postPageQuick(cmsPage);
 
         return postPageResult;
@@ -390,6 +398,138 @@ public class CourseServiceImpl implements ICourseService {
         }
 
         return builder.toString();
+    }
+
+    public CoursePub constructCoursePub(CourseBase base) {
+
+        CoursePub pub = new CoursePub();
+        CourseMarket courseMarket = courseMarketDao.getByID(base.getId());
+        if (courseMarket == null) {
+
+            courseMarket = new CourseMarket();
+            courseMarket.setId(base.getId());
+            courseMarket.setPrice(0.0F);
+            courseMarket.setPrice_old(0.0F);
+            courseMarket.setQq("这个老师有点懒,没有留下联系方式呀,请等待后续更新哈!");
+            courseMarket.setStartTime(new Date());
+            courseMarket.setValid("204001");
+            courseMarket.setCharge("203001");
+            courseMarket.setEndTime(new Date());
+            courseMarket.setStartTime(new Date());
+            courseMarket.setExpires(new Date());
+
+
+        }
+        CoursePic coursePic = this.getCoursePic(base.getId());
+        pub.setId(base.getId());
+        if (base.getMt() != null) {
+
+            pub.setMt(base.getMt());
+        }
+
+        if (base.getName() != null) {
+
+            pub.setName(base.getName());
+        }
+
+        if (coursePic != null) {
+
+            if (coursePic.getPic() != null) {
+
+                pub.setPic(coursePic.getPic());
+            }
+
+        } else {
+            pub.setPic("");
+        }
+
+        // 将Float转换成Double类型.
+        double price = 0.0;
+        double price_old = 0.0;
+
+
+        if (courseMarket.getPrice() != null) {
+
+            price = Double.parseDouble(String.valueOf(courseMarket.getPrice()));
+            pub.setPrice(price);
+        }
+
+        if (courseMarket.getPrice_old() != null) {
+
+            price_old = Double.parseDouble(String.valueOf(courseMarket.getPrice_old()));
+            pub.setPrice_old(price_old);
+        }
+
+        if (courseMarket.getQq() != null) {
+
+            pub.setQq(courseMarket.getQq());
+        }
+
+        if (base.getSt() != null) {
+
+            pub.setSt(base.getSt());
+        }
+
+        if (base.getStudymodel() != null) {
+
+            pub.setStudymodel(base.getStudymodel());
+        }
+
+        if (base.getTeachmode() != null) {
+
+            pub.setTeachmode(base.getTeachmode());
+        }
+
+        /*需要将TeachPlanNode转换JSON存入到MYSQL中*/
+        TeachPlanNode node = teachPlanDao.getNode(base.getId());
+        if (node != null) {
+
+            pub.setTeachplan(JSON.toJSONString(node));
+        }
+
+        pub.setTimestamp(new Date());
+        if (base.getUsers() != null) {
+
+            pub.setUsers(base.getUsers());
+        }
+
+        if (courseMarket.getCharge() != null) {
+
+            pub.setCharge(courseMarket.getCharge());
+        }
+
+
+        if (base.getGrade() != null) {
+
+            pub.setGrade(base.getGrade());
+        }
+
+        if (base.getDescription() != null) {
+
+            pub.setDescription(base.getDescription());
+        }
+
+        if (courseMarket.getExpires() != null) {
+
+            pub.setExpires(courseMarket.getExpires().toString());
+        }
+
+        return pub;
+    }
+
+    public CoursePic getCoursePic(String courseID) {
+
+        List<CoursePic> coursePicUsing = coursePicDao.getCoursePicUsing(courseID);
+        if (coursePicUsing == null) {
+
+            return null;
+        }
+
+        if (coursePicUsing.size() == 1) {
+            return coursePicUsing.get(0);
+        }
+
+        return null;
     }
 
 

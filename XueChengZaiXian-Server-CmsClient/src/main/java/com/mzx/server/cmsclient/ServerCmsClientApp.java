@@ -17,7 +17,9 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = {"com.mzx.server.cmsclient"})
 @ComponentScan(basePackages = {"com.mzx.server.cmsclient.config"})
 public class ServerCmsClientApp {
+
     public static void main(String[] args) {
+
         SpringApplication.run(ServerCmsClientApp.class,args);
     }
 }

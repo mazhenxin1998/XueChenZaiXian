@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan(basePackages = {"com.mzx.servermanager"})
 public class ApplicationServerManagerCourseApp {
     public static void main(String[] args) {
+
         SpringApplication.run(ApplicationServerManagerCourseApp.class,args);
     }
 }
