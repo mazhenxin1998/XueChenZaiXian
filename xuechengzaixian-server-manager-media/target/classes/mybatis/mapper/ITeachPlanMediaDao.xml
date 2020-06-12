@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mzx.media.dao.ITeachPlanMediaDao">
+
+
+    <select id="listAll" resultType="com.mzx.framework.model.course.TeachPlanMedia">
+        select * from teachplan_media;
+    </select>
+</mapper>

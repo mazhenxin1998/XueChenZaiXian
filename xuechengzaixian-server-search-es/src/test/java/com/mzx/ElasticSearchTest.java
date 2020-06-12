@@ -2,8 +2,10 @@ package com.mzx;
 
 import com.alibaba.fastjson.JSON;
 import com.mzx.framework.model.course.CoursePub;
+import com.mzx.framework.model.course.TeachPlanMediaPub;
 import com.mzx.framework.model.search.CourseSearchParam;
 import com.mzx.framework.model.search.es.ElasticSearchMappingBean;
+import com.mzx.framework.model.search.es.ElasticSearchMappingCourseMedia;
 import com.mzx.search.SpringApplicationSearchApp;
 import com.mzx.search.bean.UserBean;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
@@ -67,13 +69,12 @@ public class ElasticSearchTest {
     @Test
     public void t1() {
 
-        CreateIndexRequest createIndexRequest = new CreateIndexRequest("xc_course");
+        CreateIndexRequest createIndexRequest = new CreateIndexRequest("course_media");
         try {
             /*设置索引参数*/
             createIndexRequest.settings(Settings.builder().put("number_of_shards", 1)
                     .put("number_of_replicas", 0));
             /*设置映射*/
-
 
             restHighLevelClient.indices().create(createIndexRequest, RequestOptions.DEFAULT);
 
@@ -136,25 +137,25 @@ public class ElasticSearchTest {
          *  ...
          */
         CoursePub coursePub = new CoursePub();
-        coursePub.setCharge("XXX")
-                .setDescription("Bos物流项目2.0是传智播客推出的高级项目课程，课程包括了项目概述、系统管理、用户管理、运单管理、统计分析等模块，深入浅出的讲解了当前的流行技术。")
+        coursePub.setCharge("203001")
+                .setDescription("Bootstrap是由Twitter推出的一个前台页面开发框架，在行业之中使用较为广泛。此开发框架包含了大量的CSS、JS程序代码，可以帮助开发者（尤其是不擅长页面开发的程序人员）轻松的实现一个不受浏览器限制的精美界面效果。")
                 .setExpires("XXX")
-                .setGrade("200001")
-                .setId("402885816243d2dd016243f24c030002")
-                .setName("Bos物流项目2.0")
-                .setPic("http://img13.360buyimg.com/n7/jfs/t1/102900/26/2632/158701/5dd601a5E9ed34588/596e136d4a144cae.jpg")
+                .setGrade("200002")
+                .setId("4028e581617f945f01617f9dabc40000")
+                .setName("bootstrap开发框架")
+                .setPic("http://xuechengzaixian.cn-bj.ufileos.com/d4bf48fc-4ab7-4a6d-b39a-05cc7cff152a.jpg?UCloudPublicKey=TOKEN_e8e90452-6c00-4a80-9f77-c0e2ef6a1d7c&Signature=HA2aXgSRa34bEqLuWsZ67gIhCLQ%3D&Expires=3414254630")
                 .setPrice(99.0)
                 .setPrice_old(199.0)
-                .setPubTime("xxX")
-                .setQq("2280480546")
-                .setSt("1-3-2")
+                .setPubTime(new Date().toString())
+                .setQq("4324322")
+                .setSt("1-1-1")
                 .setStudymodel("201001")
-                .setTeachplan("XX")
-                .setTeachmode("Template")
+                .setTeachplan("{\"children\":[{\"children\":[{\"id\":\"402881e6642027980164203f94d30003\",\"pname\":\"测试-3\"},{\"id\":\"402881e6642027980164202ab9270001\",\"pname\":\"测试-1\"},{\"id\":\"402881e6642027980164203ee5970002\",\"pname\":\"测试-2\"}],\"id\":\"402881e664202798016420299e6b0000\",\"pname\":\"测试\"},{\"children\":[{\"id\":\"3\",\"pname\":\"计算机硬件\"},{\"id\":\"4\",\"pname\":\"计算机软件\"}],\"id\":\"2\",\"pname\":\"计算机原理\"},{\"children\":[{\"id\":\"6\",\"pname\":\"java语法介绍\"},{\"id\":\"7\",\"pname\":\"Hello World\"}],\"id\":\"5\",\"pname\":\"计算机编程入门\"},{\"children\":[{\"id\":\"402885816347f814016348d68bad0000\",\"pname\":\"数据库基础知识\"},{\"id\":\"402885816347f814016348d6c5920001\",\"pname\":\"SQL查询\"},{\"id\":\"402885816347f814016348d7153c0002\",\"pname\":\"SQL优化\"}],\"id\":\"4028e581617ce7b601617ce801790000\",\"pname\":\"数据库编程\"},{\"children\":[{\"id\":\"4028e58161bbcd350161bbcefe3d0001\",\"pname\":\"操作系统原理\"},{\"id\":\"4028e581617d02e101617d070ed90000\",\"pname\":\"操作系统类型介绍\"}],\"id\":\"8\",\"pname\":\"操作系统原理\"}],\"id\":\"1\",\"pname\":\"Bootstrap开发框架\"}")
+                .setTeachmode("null")
                 .setTimestamp(new Date())
-                .setUsers("本项目适应于具有一定java基础的开发人员。.")
-                .setValid("204002")
-                .setMt("1-3");
+                .setUsers("零基础，多次从入门到放弃的小白.零基础，多次从入门到放弃的小白.")
+                .setValid("204001")
+                .setMt("1-1");
         IndexRequest indexRequest = new IndexRequest("course");
         indexRequest.source(JSON.toJSONString(coursePub), XContentType.JSON);
         try {
@@ -163,6 +164,28 @@ public class ElasticSearchTest {
             e.printStackTrace();
         }
 
+
+    }
+
+    @Test
+    public void addCourseMedia(){
+
+        TeachPlanMediaPub pub = new TeachPlanMediaPub();
+        pub.setCourseid("1");
+        pub.setMedia_fileoriginalname("1.avi");
+        pub.setMedia_id("1");
+        pub.setTeachplan_id("1");
+        pub.setMedia_url("1");
+        IndexRequest request = new IndexRequest("course_media");
+        request.source(JSON.toJSONString(pub),XContentType.JSON);
+        try {
+            restHighLevelClient.index(request, DEFAULT);
+            System.out.println("索引映射添加成功!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(1);
 
     }
 

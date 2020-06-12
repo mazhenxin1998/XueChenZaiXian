@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
  */
 @ToString
 public enum CourseCode implements ResultCode {
+
     COURSE_DENIED_DELETE(false,31001,"删除课程失败，只允许删除本机构的课程！"),
     COURSE_PUBLISH_PERVIEWISNULL(false,31002,"还没有进行课程预览！"),
     COURSE_PUBLISH_CDETAILERROR(false,31003,"创建课程详情页面出错！"),
@@ -23,7 +24,8 @@ public enum CourseCode implements ResultCode {
     COURSE_BAD_PARAMETER_IS_NULL(false,331103,"请重新选择参数，该参数对应的信息不存在"),
     COURSE_CATEGORY_IS_NULL(false,331104,"课程分类为空,请先增加课程分类!"),
     COURSE_PIC_IS_EMPTY(false,331105,"课程对应的图片为空,请先上传课程图片!"),
-    COURSE_PIC_IS_HAVE_MULTIPLE_IMAGES(false,331106,"当前课程对应图片存在多个!");
+    COURSE_PIC_IS_HAVE_MULTIPLE_IMAGES(false,331106,"当前课程对应图片存在多个!"),
+    COURSE_MEDIA_TEACH_PLAN_GRADE_ERROR(false,331107,"当前节点不是叶子节点,不能选择视频,请重新选择节点!");
 
     boolean success;
 

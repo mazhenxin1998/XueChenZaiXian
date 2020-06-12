@@ -1,11 +1,13 @@
 package com.mzx.search.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.mzx.common.exception.ThrowException;
 import com.mzx.common.model.response.CommonCode;
 import com.mzx.common.model.response.QueryResponseResult;
 import com.mzx.common.model.response.QueryResult;
 import com.mzx.common.model.response.ResponseResult;
 import com.mzx.framework.model.course.CoursePub;
+import com.mzx.framework.model.course.TeachPlanMediaPub;
 import com.mzx.framework.model.search.CourseSearchParam;
 import com.mzx.search.service.IElasticService;
 import com.sun.org.apache.bcel.internal.generic.NEW;
@@ -13,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
@@ -29,13 +32,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.MatchesPattern;
 import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author ZhenXinMa
@@ -54,6 +55,9 @@ public class ElasticSearchImpl implements IElasticService {
      */
     @Value(value = "${xuechengzaixian.elasticsearch.index}")
     private String index;
+
+    @Value(value = "${xuechengzaixian.elasticsearch.index.media}")
+    private String index_course_media;
 
     @Override
     public ResponseResult addIndex(CoursePub coursePub) {
@@ -291,8 +295,8 @@ public class ElasticSearchImpl implements IElasticService {
         // 匹配关键处理.
         if (!StringUtils.isEmpty(param.getKeyword())) {
 
-//            MultiMatchQueryBuilder multiMatchQueryBuilder = QueryBuilders.multiMatchQuery(
-//                    param.getKeyword(), "name");
+            MultiMatchQueryBuilder multiMatchQueryBuilder = QueryBuilders.multiMatchQuery(
+                    param.getKeyword(), "name");
             MatchQueryBuilder matchQuery = QueryBuilders.matchQuery("name", param.getKeyword());
             // 设置匹配占比.
 //            multiMatchQueryBuilder.minimumShouldMatch("70%");
@@ -301,7 +305,7 @@ public class ElasticSearchImpl implements IElasticService {
             // bool查询
             boolQueryBuilder.must(matchQuery);
         }
-
+//
 //        // 过滤.
 //        if (!StringUtils.isEmpty(param.getMt())) {
 //
@@ -322,8 +326,10 @@ public class ElasticSearchImpl implements IElasticService {
         // 高亮
         HighlightBuilder highlightBuilder = new HighlightBuilder();
         highlightBuilder.field("name");
-        highlightBuilder.preTags("<span style='color:#f8f078'>");
+        highlightBuilder.preTags("<span style='color:#f878f6'>");
         highlightBuilder.postTags("</span>");
+//        highlightBuilder.preTags("<font class='eslight'>");
+//        highlightBuilder.postTags("</font>");
         // 只显示一个高亮
         highlightBuilder.requireFieldMatch(false);
         builder.highlighter(highlightBuilder);
@@ -352,11 +358,145 @@ public class ElasticSearchImpl implements IElasticService {
         QueryResult result = new QueryResult();
         result.setList(list);
         result.setTotal((long) list.size());
-
+        System.out.println("service方法发生了...");
+        System.out.println("返回的数据是：   " + list.toString());
         return new QueryResponseResult(CommonCode.SUCCESS, result);
     }
 
-    List<CoursePub> getResponseCoursePub(@NotNull SearchResponse searchResponse) {
+    @Override
+    public Map<String, CoursePub> getall(String id) {
+
+        if (StringUtils.isEmpty(id)) {
+
+            ThrowException.exception(CommonCode.BAD_PARAMETERS);
+        }
+
+        /*根据课程ID查询  ES中精确查询.*/
+        SearchRequest request = new SearchRequest(index);
+        SearchSourceBuilder builder = new SearchSourceBuilder();
+        // 参数传进来的是课程ID. 也就是对应着ES中的ID.
+        TermQueryBuilder termQuery = QueryBuilders.termQuery("id", id);
+        builder.query(termQuery);
+        // 执行搜索.
+        request.source(builder);
+        SearchResponse response = null;
+        try {
+
+            response = client.search(request, RequestOptions.DEFAULT);
+            // 解析器结果.
+            SearchHits hits = response.getHits();
+            Map<String, CoursePub> map = new HashMap<>();
+            for (SearchHit hit : hits.getHits()) {
+
+                // 这个是获取_id
+                String hitId = hit.getId();
+                // 这个是获取_id锁对应的值.
+                Map<String, Object> sourceAsMap = hit.getSourceAsMap();
+                String s1 = (String) sourceAsMap.get("id");
+                String s2 = (String) sourceAsMap.get("name");
+                String s3 = (String) sourceAsMap.get("grade");
+                String s4 = (String) sourceAsMap.get("charge");
+                String s5 = (String) sourceAsMap.get("pic");
+                String s6 = (String) sourceAsMap.get("description");
+                String s7 = (String) sourceAsMap.get("teachplan");
+
+                // 封装CoursePub
+                CoursePub pub = new CoursePub();
+                pub.setId(s1);
+                pub.setName(s2);
+                pub.setGrade(s3);
+                pub.setCharge(s4);
+                pub.setPic(s5);
+                pub.setDescription(s6);
+                // teachPlan 应该是JSON形式.
+                pub.setTeachplan(s7);
+                map.put(s1, pub);
+
+            }
+
+            return map;
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    @Override
+    public TeachPlanMediaPub getMedia(String teachPlanID) {
+
+        if (StringUtils.isEmpty(teachPlanID)) {
+
+            ThrowException.exception(CommonCode.BAD_PARAMETERS);
+        }
+
+        // 请求到数据之后应该判断是否为叶子节点. 猜想
+        SearchRequest request = new SearchRequest(index_course_media);
+        SearchSourceBuilder builder = new SearchSourceBuilder();
+        // 精确查找,根据课程计划ID.
+        TermQueryBuilder termQuery = QueryBuilders.termQuery("teachplan_id", teachPlanID);
+        builder.query(termQuery);
+        request.source(builder);
+        // 执行搜索.
+        SearchResponse response = null;
+        try {
+
+            response = client.search(request, RequestOptions.DEFAULT);
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+
+        TeachPlanMediaPub pub = null;
+        for (SearchHit hit : response.getHits().getHits()) {
+
+            Map<String, Object> map = hit.getSourceAsMap();
+            pub = new TeachPlanMediaPub();
+            String courseid = (String) map.get("courseid");
+            String media_url = (String) map.get("media_url");
+            String media_id = (String) map.get("media_id");
+            String media_fileoriginalname = (String) map.get("media_fileoriginalname");
+            String planID = (String) map.get("teachplan_id");
+            pub.setCourseid(courseid);
+            pub.setMedia_fileoriginalname(media_fileoriginalname);
+            pub.setMedia_id(media_id);
+            // 需要将该URL地址改为相对路径地址.
+            String[] strings = media_url.split("/");
+            //D:/Server/FFmpeg/test/c/5/c5c75d70f382e6016d2f506d134eee11/hls/c5c75d70f382e6016d2f506d134eee11.m3u8
+            // 需要删除D:/Server/FFmpeg/test/
+            StringBuilder b = new StringBuilder();
+            for (int i = 0; i < strings.length; i++) {
+
+                if (i >= 4) {
+                    // 说明
+                    b.append(strings[i]);
+                    if (i != 8) {
+
+                        b.append("/");
+                    }
+
+                }
+
+            }
+
+            pub.setMedia_url(b.toString());
+            pub.setTeachplan_id(planID);
+
+        }
+
+        return pub;
+    }
+
+    /**
+     * 显示高亮字段步骤: 将原来的字段替换带有CSS样式的字段.
+     * 先通过SearchResponse获取到SearchHit 并且拿到该Hit对应的Map. 该Map结构Key为对象属性名 value为该属性的值.
+     *
+     * @param searchResponse
+     * @return
+     */
+    protected List<CoursePub> getResponseCoursePub(@NotNull SearchResponse searchResponse) {
 
         /*高亮搜索 返回的结果就是带有特殊标签的结果.*/
         List<CoursePub> list = new ArrayList<>();
@@ -370,6 +510,7 @@ public class ElasticSearchImpl implements IElasticService {
             Map<String, Object> sourceAsMap = hit.getSourceAsMap();
             if (name != null) {
 
+                // 如果该Map中name的值为空,那么就没有必要继续执行了,因为页面高亮显示只显示name字段.
                 Text[] texts = name.fragments();
                 String n_name = "";
                 for (Text text : texts) {

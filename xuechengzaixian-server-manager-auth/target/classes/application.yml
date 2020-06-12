@@ -1,0 +1,92 @@
+server:
+  port: 40400
+  servlet:
+    context-path: /auth
+spring:
+  application:
+    name: xuechengzaixian-server-manager-auth
+  datasource:
+    druid:
+      url: jdbc:mysql://192.144.198.148:3306/xc_user?useSSL=false&serverTimezone=GMT&useUnicode=true&characterEncoding=utf-8
+      username: root
+      password: MMMzzzxxx1998.
+      driver-class-name: com.mysql.jdbc.Driver
+      # 定义初始化连接数
+      initial-size: 5
+      # 定义最小空闲数
+      min-idle: 5
+      # 定义最大连接数
+      max-active: 20
+      # 获取连接最大等待时间，单位毫秒 缺省启用公平锁，并发效率会有所下降如果需要可以通过配置useUnfairLock属性为true使用非公平锁。
+      max-wait: 10000
+      #  时间到了之后是否强制删除.
+      log-abandoned: true
+      remove-abandoned: true
+      # 连接池租用连接到期会强制关闭，2min足够
+      remove-abandoned-timeout: 120
+      # 检测链接是否有效的SQL语句.
+      validation-query: SELECT 1
+      # 申请链接时 检测链接是否有效 配置了效率降低.
+      test-on-borrow: false
+      # 归还链接时， 检测链接是否有效， 配置了效率降低.
+      test-on-return: false
+      # 空闲检查时间间隔.
+      time-between-eviction-runs-millis: 60000
+      # 连接保持空闲而不被驱逐的最小等待时间  最小空闲
+      min-evictable-idle-time-millis: 30000
+      test-while-idle: true
+  # 配置服务中心
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.144.198.148:8848
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 5000   # 连接超时时间 毫秒
+    jedis:
+      pool:
+        max-active: 3
+        max-idle: 3
+        min-idle: 1
+        max-wait: -1    # 连接池最大等待时间 -1 没有时间限制.
+auth:
+  tokenValiditySeconds: 1200 # token存储到redis中的过期时间.
+  clientId: XcWebApp
+  clientSecret: XcWebApp
+  cookieDomain: mzx.com
+  cookieMaxAge: -1
+# 配置security
+encrypt:
+  key-store:
+    location: classpath:/xc.keystore
+    secret: xuechengkeystore
+    alias: xckey
+    password: xuecheng
+
+# 配置ribbon
+ribbon:
+  # ribbon最大重试次数, 前提是在Nacos可以找到服务.
+  MaxAutoRetries: 2
+  # 切换实例的最大重试次数.
+  MaxAutoRetriesNextServer: 3
+  # 对所有的操作进行重试是很危险的，如果是Get则可以，如果是post、put在没有实现幂等性情况下是危险的.
+  OkToRetryOnAllOperations: false
+  # 请求连接的超时时间
+  ConnectTimeout: 5000
+  # 请求处理的超时时间.
+  ReadTimeout: 6000
+  okhttp:
+    enabled: true
+# 配置mybatis
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: com.mzx
+  configuration:
+    # 开启驼峰转换.
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    com:
+      mzx:
+        dao: debug

@@ -2,10 +2,12 @@ package com.mzx.servermanager.controller;
 
 import com.mzx.api.course.ICourseControllerApi;
 import com.mzx.common.model.request.RequestData;
+import com.mzx.common.model.response.CommonCode;
 import com.mzx.common.model.response.QueryResponseResult;
 import com.mzx.common.model.response.ResponseResult;
 import com.mzx.framework.model.course.CourseBase;
 import com.mzx.framework.model.course.CourseView;
+import com.mzx.framework.model.course.TeachPlanMedia;
 import com.mzx.framework.model.course.ext.CourseInfo;
 import com.mzx.framework.model.course.response.CoursePublishResult;
 import com.mzx.servermanager.dao.ICourseDao;
@@ -121,6 +123,17 @@ public class CourseController implements ICourseControllerApi {
         /* 课程发布.
         *调用的是Service的publish方法*/
         return courseService.publish(courseID);
+    }
+
+    @Override
+    @PostMapping(value = "/savemedia")
+    public ResponseResult addMedia(@RequestBody TeachPlanMedia teachPlanMedia) {
+
+        // 前台传过来的teachPlanMeida就不是相对路径.
+        System.out.println(teachPlanMedia.toString());
+        /*
+        * 保存Media信息向teachPlan_media 是在选择视频之后才保存的.*/
+        return courseService.addMedia(teachPlanMedia);
     }
 
     /**

@@ -2,6 +2,7 @@ package com.mzx.servermanager.service.impl;
 
 
 import com.alibaba.fastjson.JSON;
+import com.mzx.common.exception.ThrowException;
 import com.mzx.common.model.request.RequestData;
 import com.mzx.common.model.response.CommonCode;
 import com.mzx.common.model.response.QueryResponseResult;
@@ -18,6 +19,7 @@ import com.mzx.servermanager.dao.*;
 import com.mzx.servermanager.feign.CmsPagePreviewServiceOpenFeign;
 import com.mzx.servermanager.feign.IElasticSearchServerClient;
 import com.mzx.servermanager.service.ICourseService;
+import com.mzx.servermanager.service.ITeachPlanMediaPubService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
@@ -55,7 +57,13 @@ public class CourseServiceImpl implements ICourseService {
     private ITeachPlanDao teachPlanDao;
 
     @Resource
+    private ITeachPlanMediaDao teachPlanMediaDao;
+
+    @Resource
     private IElasticSearchServerClient iElasticSearchServerClient;
+
+    @Resource
+    private ITeachPlanMediaPubService iTeachPlanMediaPubService;
 
     @Value("${xuechengzaixian.course.publish.dataUrlPre}")
     private String publish_dataUrlPre;
@@ -345,6 +353,8 @@ public class CourseServiceImpl implements ICourseService {
         CoursePub coursePub = this.constructCoursePub(courseBase);
         iElasticSearchServerClient.addIndex(coursePub);
 
+        //iTeachPlanMediaPubService.saveTeachPlanMediaPub(courseID);
+
         return new CoursePublishResult(CommonCode.SUCCESS, pageUrl);
     }
 
@@ -385,6 +395,48 @@ public class CourseServiceImpl implements ICourseService {
         CmsPostPageResult postPageResult = cmsClient.postPageQuick(cmsPage);
 
         return postPageResult;
+    }
+
+    @Override
+    public ResponseResult addMedia(TeachPlanMedia teachPlanMedia) {
+
+        if (teachPlanMedia == null) {
+
+            ThrowException.exception(CommonCode.BAD_PARAMETERS);
+        }
+
+        String teachplanId = teachPlanMedia.getTeachplanId();
+        TeachPlan teachPlan = teachPlanDao.getByID(teachplanId);
+        if (StringUtils.isEmpty(teachPlan.getGrade()) || !"3".equals(teachPlan.getGrade())) {
+
+            ThrowException.exception(CourseCode.COURSE_MEDIA_TEACH_PLAN_GRADE_ERROR);
+        }
+
+        // 查询TeachPlanMedia 通过ID查询使用teachPlanID查询.  一个叶子teachPlan确定一个 mediaFile.
+        TeachPlanMedia planMedia = null;
+        planMedia = teachPlanMediaDao.findById(teachplanId);
+        if (planMedia != null) {
+
+            // 如果数据库中存在 那么就删除 并且将值赋值给planMedia变量.
+            teachPlanMediaDao.deleteById(teachplanId);
+        } else {
+
+            planMedia = new TeachPlanMedia();
+        }
+
+        // 为即将存入数据库中的TeachPlanMedia planMedia更新数据.
+        planMedia.setCourseid(teachPlanMedia.getCourseid());
+        planMedia.setMediaFileoriginalname(teachPlanMedia.getMediaFileoriginalname());
+        planMedia.setMediaId(teachPlanMedia.getMediaId());
+        // url应该是相对地址.
+        planMedia.setMediaUrl(teachPlanMedia.getMediaUrl());
+        planMedia.setTeachplanId(teachplanId);
+        // 存入数据库 如果原先存在那么应该覆盖原先的 如果不存在则直接写入数据库. 唯一的向teachplan_media中加入数据.
+        teachPlanMediaDao.addTeachPlanMedia(planMedia);
+
+        iTeachPlanMediaPubService.saveTeachPlanMediaPub(teachPlanMedia.getCourseid());
+
+        return new ResponseResult(CommonCode.SUCCESS);
     }
 
 

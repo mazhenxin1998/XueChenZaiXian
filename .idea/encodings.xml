@@ -15,14 +15,24 @@
     <file url="file://$PROJECT_DIR$/XueChengZaiXian-Server-Manage-Cms/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/XueChengZaiXian-Util/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/XueChengZaiXian-Util/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xc-service-ucenter-auth/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xc-service-ucenter-auth/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xuechengzaixian-login/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xuechengzaixian-login/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xuechengzaixian-openfeign-test2/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xuechengzaixian-openfeign-test2/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xuechengzaixian-openfign-test/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xuechengzaixian-openfign-test/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xuechengzaixian-server-manager-auth/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xuechengzaixian-server-manager-auth/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xuechengzaixian-server-manager-course/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xuechengzaixian-server-manager-course/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xuechengzaixian-server-manager-learning/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xuechengzaixian-server-manager-learning/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xuechengzaixian-server-manager-media-processor/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xuechengzaixian-server-manager-media-processor/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xuechengzaixian-server-manager-media/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xuechengzaixian-server-manager-media/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xuechengzaixian-server-search-es/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xuechengzaixian-server-search-es/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xuechengzaixina-fastdfs-test/src/main/java" charset="UTF-8" />

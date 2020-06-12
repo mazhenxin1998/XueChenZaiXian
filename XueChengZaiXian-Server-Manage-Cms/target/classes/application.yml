@@ -53,4 +53,9 @@ xuecheng:
 feign:
   hystrix:
     enabled: true
-
+# 测试YAML语法.
+test:
+  -
+    id:1
+  -
+    id:2

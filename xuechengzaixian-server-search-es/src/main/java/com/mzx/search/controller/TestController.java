@@ -89,6 +89,12 @@ public class TestController {
         return list;
     }
 
+
+    public String addIndex(){
+        return "SUCCESS";
+    }
+
+
     @GetMapping(value = "/search/high")
     public Object t3() {
 

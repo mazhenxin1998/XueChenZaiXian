@@ -5,6 +5,7 @@ import com.mzx.common.model.response.QueryResponseResult;
 import com.mzx.common.model.response.ResponseResult;
 import com.mzx.framework.model.course.CourseBase;
 import com.mzx.framework.model.course.CourseView;
+import com.mzx.framework.model.course.TeachPlanMedia;
 import com.mzx.framework.model.course.ext.CourseInfo;
 import com.mzx.framework.model.course.response.CoursePublishResult;
 import io.swagger.annotations.Api;
@@ -75,6 +76,15 @@ public interface ICourseControllerApi {
      */
     @ApiOperation(value = "课程发布接口")
     CoursePublishResult publish(String cmsPageID);
+
+    /**
+     * 增加媒资信息 向MySQL.
+     *
+     * @param teachPlanMedia
+     * @return
+     */
+    @ApiOperation(value = "增加媒资信息")
+    ResponseResult addMedia(TeachPlanMedia teachPlanMedia);
 
 
 }

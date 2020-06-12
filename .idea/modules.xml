@@ -10,10 +10,15 @@
       <module fileurl="file://$PROJECT_DIR$/XueChengZaiXian-Server-CmsClient/XueChengZaiXian-Server-CmsClient.iml" filepath="$PROJECT_DIR$/XueChengZaiXian-Server-CmsClient/XueChengZaiXian-Server-CmsClient.iml" />
       <module fileurl="file://$PROJECT_DIR$/XueChengZaiXian-Server-Manage-Cms/XueChengZaiXian-Server-Manage-Cms.iml" filepath="$PROJECT_DIR$/XueChengZaiXian-Server-Manage-Cms/XueChengZaiXian-Server-Manage-Cms.iml" />
       <module fileurl="file://$PROJECT_DIR$/XueChengZaiXian-Util/XueChengZaiXian-Util.iml" filepath="$PROJECT_DIR$/XueChengZaiXian-Util/XueChengZaiXian-Util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xc-service-ucenter-auth/xc-service-ucenter-auth.iml" filepath="$PROJECT_DIR$/xc-service-ucenter-auth/xc-service-ucenter-auth.iml" />
       <module fileurl="file://$PROJECT_DIR$/xuechengzaixian-login/xuechengzaixian-login.iml" filepath="$PROJECT_DIR$/xuechengzaixian-login/xuechengzaixian-login.iml" />
       <module fileurl="file://$PROJECT_DIR$/xuechengzaixian-openfeign-test2/xuechengzaixian-openfeign-test2.iml" filepath="$PROJECT_DIR$/xuechengzaixian-openfeign-test2/xuechengzaixian-openfeign-test2.iml" />
       <module fileurl="file://$PROJECT_DIR$/xuechengzaixian-openfign-test/xuechengzaixian-openfign-test.iml" filepath="$PROJECT_DIR$/xuechengzaixian-openfign-test/xuechengzaixian-openfign-test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xuechengzaixian-server-manager-auth/xuechengzaixian-server-manager-auth.iml" filepath="$PROJECT_DIR$/xuechengzaixian-server-manager-auth/xuechengzaixian-server-manager-auth.iml" />
       <module fileurl="file://$PROJECT_DIR$/xuechengzaixian-server-manager-course/xuechengzaixian-server-manager-course.iml" filepath="$PROJECT_DIR$/xuechengzaixian-server-manager-course/xuechengzaixian-server-manager-course.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xuechengzaixian-server-manager-learning/xuechengzaixian-server-manager-learning.iml" filepath="$PROJECT_DIR$/xuechengzaixian-server-manager-learning/xuechengzaixian-server-manager-learning.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xuechengzaixian-server-manager-media/xuechengzaixian-server-manager-media.iml" filepath="$PROJECT_DIR$/xuechengzaixian-server-manager-media/xuechengzaixian-server-manager-media.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xuechengzaixian-server-manager-media-processor/xuechengzaixian-server-manager-media-processor.iml" filepath="$PROJECT_DIR$/xuechengzaixian-server-manager-media-processor/xuechengzaixian-server-manager-media-processor.iml" />
       <module fileurl="file://$PROJECT_DIR$/xuechengzaixian-server-search-es/xuechengzaixian-server-search-es.iml" filepath="$PROJECT_DIR$/xuechengzaixian-server-search-es/xuechengzaixian-server-search-es.iml" />
       <module fileurl="file://$PROJECT_DIR$/xuechengzaixina-fastdfs-test/xuechengzaixina-fastdfs-test.iml" filepath="$PROJECT_DIR$/xuechengzaixina-fastdfs-test/xuechengzaixina-fastdfs-test.iml" />
       <module fileurl="file://$PROJECT_DIR$/xuechengzaixina-filesystem/xuechengzaixina-filesystem.iml" filepath="$PROJECT_DIR$/xuechengzaixina-filesystem/xuechengzaixina-filesystem.iml" />

@@ -6,11 +6,13 @@ import com.mzx.common.exception.ThrowException;
 import com.mzx.common.model.response.*;
 import com.mzx.framework.model.course.CourseBase;
 import com.mzx.framework.model.course.TeachPlan;
+import com.mzx.framework.model.course.TeachPlanMedia;
 import com.mzx.framework.model.course.ext.TeachPlanDaoReceive;
 import com.mzx.framework.model.course.ext.TeachPlanNode;
 import com.mzx.framework.model.course.response.CourseCode;
 import com.mzx.servermanager.dao.ICourseBaseDao;
 import com.mzx.servermanager.dao.ITeachPlanDao;
+import com.mzx.servermanager.dao.ITeachPlanMediaDao;
 import com.mzx.servermanager.service.ITeachPlanService;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 import com.sun.org.apache.bcel.internal.generic.RETURN;
@@ -38,6 +40,9 @@ public class TeachPlanServiceImpl implements ITeachPlanService {
     @Resource
     private ICourseBaseDao courseBaseDao;
 
+    @Resource
+    private ITeachPlanMediaDao teachPlanMediaDao;
+
     @Override
     public QueryResponseResult get(String courseID) {
 
@@ -46,8 +51,9 @@ public class TeachPlanServiceImpl implements ITeachPlanService {
             ThrowException.exception(CommonCode.BAD_PARAMETERS);
         }
         List<TeachPlanNode> node = teachPlanDao.getTeachPlanNode(courseID);
+        List<TeachPlanNode> teachPlanNodes = this.completeTeachPlanNode(node);
         QueryResult result = new QueryResult();
-        result.setList(node);
+        result.setList(teachPlanNodes);
         result.setTotal((long) node.size());
         List<TeachPlan> teachPlanNodeParent = this.getTeachPlanNodeParent(node);
         QueryResponseResult queryResponseResult = new QueryResponseResult(CommonCode.SUCCESS, result);
@@ -167,6 +173,45 @@ public class TeachPlanServiceImpl implements ITeachPlanService {
         }
 
         return teachPlanRoot.get(0).getId();
+    }
+
+    private List<TeachPlanNode> completeTeachPlanNode(List<TeachPlanNode> node) {
+
+        /*方法返回的是Node其中包含media信息.*/
+        if (node == null) {
+
+            return null;
+        }
+
+        if (node.get(0).getChildren() != null) {
+
+            List<TeachPlanNode> children = node.get(0).getChildren();
+            for (TeachPlanNode child : children) {
+
+                // 这里都是三级节点.
+                List<TeachPlanNode> childChildren = child.getChildren();
+                for (TeachPlanNode childChild : childChildren) {
+
+                    if ("3".equals(childChild.getGrade())) {
+
+                        // 说明现在表示的是叶子节点.
+                        String teachPlanID = childChild.getId();
+                        TeachPlanMedia planMedia = teachPlanMediaDao.findById(teachPlanID);
+                        if (planMedia != null) {
+
+                            System.out.println("给三级节点赋值视屏名字。");
+                            childChild.setMediaFileoriginalname(planMedia.getMediaFileoriginalname());
+                            childChild.setMediaId(planMedia.getMediaId());
+                        }
+
+                    }
+                }
+
+            }
+
+        }
+
+        return node;
     }
 
 

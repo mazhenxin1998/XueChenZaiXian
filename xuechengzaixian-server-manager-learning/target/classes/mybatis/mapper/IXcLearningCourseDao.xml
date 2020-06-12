@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mzx.learning.dao.IXcLearningCourseDao">
+
+    <resultMap id="XcLearningCourse" type="com.mzx.framework.model.learning.XcLearningCourse">
+        <id column="id" property="id"></id>
+        <result column="course_id" property="course_id"></result>
+        <result column="user_id" property="user_id"></result>
+        <result column="valid" property="valid"></result>
+        <result column="start_time" property="start_time"></result>
+        <result column="end_time" property="end_time"></result>
+        <result column="status" property="status"></result>
+    </resultMap>
+    
+    <select id="listAll" resultMap="XcLearningCourse">
+        select * from xc_learning_course;
+    </select>
+</mapper>

@@ -5,6 +5,7 @@ import com.mzx.common.model.response.QueryResponseResult;
 import com.mzx.common.model.response.ResponseResult;
 import com.mzx.framework.model.course.CourseBase;
 import com.mzx.framework.model.course.CourseView;
+import com.mzx.framework.model.course.TeachPlanMedia;
 import com.mzx.framework.model.course.response.CmsPostPageResult;
 import com.mzx.framework.model.course.response.CoursePublishResult;
 
@@ -83,6 +84,11 @@ public interface ICourseService {
 
     Integer count();
 
+    /**
+     * 课程发布接口 根据课程ID将该课程状态改为已发布.
+     * @param courseID
+     * @return
+     */
     CoursePublishResult publish(String courseID);
 
     /**
@@ -101,6 +107,21 @@ public interface ICourseService {
      */
     CmsPostPageResult publishPageOfficial(String courseID);
 
+    /**
+     * 关联课程和媒资信息.
+     * 需要做的判断就是确定选中的节点是否为叶子节点,该系统只有叶子节点可以允许选择视频.
+     *
+     * @param teachPlanMedia
+     * @return
+     */
+    ResponseResult addMedia(TeachPlanMedia teachPlanMedia);
+
+    /**
+     * 字符串的拼接.
+     *
+     * @param args
+     * @return
+     */
     String appendString(String... args);
 
 

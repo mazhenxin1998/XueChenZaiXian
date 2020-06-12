@@ -2,13 +2,20 @@
   <dictionary name="lenovo">
     <words>
       <w>alibaba</w>
+      <w>checkchunk</w>
       <w>eshostlist</w>
+      <w>exchangename</w>
       <w>freemaker</w>
+      <w>mergechunks</w>
       <w>nacos</w>
       <w>pagehelper</w>
+      <w>queuename</w>
+      <w>routingkey</w>
       <w>servermanager</w>
       <w>ucenter</w>
       <w>ucloud</w>
+      <w>uploadchunk</w>
+      <w>xuecheng</w>
       <w>xuechengzaixian</w>
     </words>
   </dictionary>

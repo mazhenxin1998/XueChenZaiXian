@@ -12,19 +12,25 @@
         <module name="XueChengZaiXian-Server-Manage-Cms" />
         <module name="xuechengzaixina-openfeign-client-test" />
         <module name="XueChengZaiXian-Util" />
-        <module name="xuechengzaixian-login" />
+        <module name="xuechengzaixian-server-manager-learning" />
         <module name="xuechengzaixian-openfign-test" />
         <module name="xuechengzaixina-fastdfs-test" />
+        <module name="xuechengzaixian-server-manager-media-processor" />
         <module name="xuechengzaixian-server-search-es" />
         <module name="xuechengzaixian-server-manager-course" />
         <module name="XueChengZaiXian-Server-CmsClient" />
+        <module name="xc-service-ucenter-auth" />
+        <module name="xuechengzaixian-server-manager-media" />
         <module name="XueChengZaiXian-Common" />
         <module name="XueChengZaiXian-Model" />
-        <module name="XueChengZaiXian-Freemarker-Test" />
+        <module name="xuechengzaixian-login" />
+        <module name="xuechengzaixian-server-manager-auth" />
         <module name="xuechengzaixina-filesystem" />
+        <module name="XueChengZaiXian-Freemarker-Test" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="xc-service-ucenter-auth" target="1.8" />
       <module name="XueChengZaiXian" target="1.8" />
       <module name="XueChengZaiXian-Api" target="1.8" />
       <module name="XueChengZaiXian-Common" target="1.8" />
@@ -35,8 +41,14 @@
       <module name="xuechengzaixian-openfign-test" target="1.8" />
       <module name="XueChengZaiXian-Server-CmsClient" target="1.8" />
       <module name="XueChengZaiXian-Server-Manage-Cms" target="1.8" />
+      <module name="xuechengzaixian-server-manage-media" target="1.7" />
+      <module name="xuechengzaixian-server-manager-auth" target="1.8" />
       <module name="xuechengzaixian-server-manager-course" target="1.8" />
+      <module name="xuechengzaixian-server-manager-learning" target="1.8" />
+      <module name="xuechengzaixian-server-manager-media" target="1.8" />
+      <module name="xuechengzaixian-server-manager-media-processor" target="1.8" />
       <module name="xuechengzaixian-server-search-es" target="1.8" />
+      <module name="xuechengzaixian-test" target="1.8" />
       <module name="XueChengZaiXian-Util" target="1.8" />
       <module name="xuechengzaixina-fastdfs-test" target="1.8" />
       <module name="xuechengzaixina-filesystem" target="1.8" />

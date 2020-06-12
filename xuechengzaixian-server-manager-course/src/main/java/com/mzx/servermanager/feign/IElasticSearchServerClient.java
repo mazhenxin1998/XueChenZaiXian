@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Component
 @FeignClient(value = "xuechengzaixian-server-search-es")
-@RequestMapping(value = "/es")
+@RequestMapping(value = "/search")
 public interface IElasticSearchServerClient {
 
-    @PostMapping(value = "/add")
+    @PostMapping(value = "/course/add")
     ResponseResult addIndex(CoursePub coursePub);
 
 //    @GetMapping(value = "/search/high")

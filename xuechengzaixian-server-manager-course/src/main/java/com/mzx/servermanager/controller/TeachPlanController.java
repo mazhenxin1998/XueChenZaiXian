@@ -3,6 +3,7 @@ package com.mzx.servermanager.controller;
 import com.mzx.api.course.ITeachPlanControllerApi;
 import com.mzx.common.model.response.QueryResponseResult;
 import com.mzx.common.model.response.ResponseResult;
+import com.mzx.framework.model.course.CoursePub;
 import com.mzx.framework.model.course.TeachPlan;
 import com.mzx.servermanager.service.ITeachPlanService;
 import javafx.scene.chart.ValueAxis;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * @author ZhenXinMa
@@ -29,6 +31,7 @@ public class TeachPlanController implements ITeachPlanControllerApi {
     @GetMapping(value = "/get/{courseID}")
     public QueryResponseResult getByCourseID(@PathVariable(value = "courseID") String courseID) {
         log.info("-----------------------Controller调用成功!");
+        System.out.println(courseID);
         return teachPlanService.get(courseID);
     }
 

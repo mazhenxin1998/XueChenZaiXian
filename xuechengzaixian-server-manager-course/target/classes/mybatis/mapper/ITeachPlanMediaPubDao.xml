@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mzx.servermanager.dao.ITeachPlanMediaPubDao">
+
+
+    <insert id="insert" parameterType="com.mzx.framework.model.course.TeachPlanMediaPub">
+        insert
+        into
+        teachplan_media_pub(teachplan_id,media_id,media_fileoriginalname,media_url,courseid,`timestamp`)
+        values(#{teachPlanMediaPub.teachplan_id},#{teachPlanMediaPub.media_id},#{teachPlanMediaPub.media_fileoriginalname},
+                #{teachPlanMediaPub.media_url},#{teachPlanMediaPub.courseid},#{teachPlanMediaPub.timestamp});
+    </insert>
+
+    <delete id="delete">
+    delete
+    from
+    teachplan_media_pub
+    where
+    teachplan_media_pub.teachplan_id = #{teachPlanId};
+    </delete>
+
+    <select id="findById" resultType="com.mzx.framework.model.course.TeachPlanMediaPub">
+        select
+        *
+        from
+        teachplan_media_pub
+        where
+        teachplan_media_pub.teachplan_id = #{id};
+    </select>
+</mapper>

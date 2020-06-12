@@ -11,11 +11,9 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-public class SpringApplicationSearchApp
-{
-    public static void main(String[] args)
-    {
+@ComponentScan(basePackages = {"com.mzx"})
+public class SpringApplicationSearchApp {
+    public static void main(String[] args) {
         SpringApplication.run(SpringApplicationSearchApp.class,args);
     }
-
 }

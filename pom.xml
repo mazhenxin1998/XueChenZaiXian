@@ -21,6 +21,11 @@
         <module>xuechengzaixina-openfeign-client-test</module>
         <module>xuechengzaixian-login</module>
         <module>xuechengzaixian-server-search-es</module>
+        <module>xuechengzaixian-server-manager-media</module>
+        <module>xuechengzaixian-server-manager-media-processor</module>
+        <module>xuechengzaixian-server-manager-learning</module>
+        <module>xuechengzaixian-server-manager-auth</module>
+
     </modules>
 
     <groupId>com.mzx</groupId>

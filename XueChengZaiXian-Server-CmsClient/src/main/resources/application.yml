@@ -23,7 +23,9 @@ spring:
       simple:
         # 配置了手工签收
         acknowledge-mode: manual
+        # 最小的消费者数量.
         concurrency: 1
+        # 最大的消费者数量.
         max-concurrency: 10
         retry:
           enabled: true

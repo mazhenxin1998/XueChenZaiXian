@@ -1,0 +1,47 @@
+server:
+  port: 31450
+spring:
+  application:
+    name: xuechengzaixian-server-manager-media-processor
+  data:
+    mongodb:
+      uri: mongodb://localhost
+      database: xc_media
+  rabbitmq:
+    addresses: 192.144.198.148:5672
+    username: guest
+    password: guest
+    virtual-host: /
+    connection-timeout: 15000
+    # 监听不可达消息: Exchange不存在或者是RoutingKey不存在导致消息发送不到队列.
+    publisher-returns: true
+    publisher-confirms: true
+    template:
+      # 为True 监听器则会接受到路由不可达的消息,然后进行后续处理,如果为false那么Broker自动删除该消息.
+      mandatory: true
+    listener:
+      simple:
+        # 设置MQ手工签收.
+        acknowledge-mode: manual
+        # 最小的消费者数量.
+        concurrency: 1
+        # 最大消费者数量.
+        max-concurrency: 10
+        retry:
+          enabled: true
+          max-interval: 1200
+          max-attempts: 5
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.144.198.148:8848
+xuechengzaixian:
+  mq:
+    queue‐media‐video‐processor: queue_media_video_processor
+    routingkey‐media‐video: routingkey_media_video
+    exchange: ex_media_processor
+# 配置视屏存放的位置.
+  video:
+    location: D:/Server/FFmpeg/test
+    ffmpeg-path: ffmpeg
+    upload-location: D:/Server/FFmpeg/test
